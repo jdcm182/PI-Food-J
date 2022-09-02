@@ -4,10 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import store from './store'
+
+// se va {/* <React.StrictMode> */} y agrego Provider y BrowserRouter
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
+  ,
   document.getElementById('root')
 );
 
@@ -15,3 +23,10 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+/*
+  ___           _           
+ |_ _|_ __   __| | _____  __
+  | || '_ \ / _` |/ _ \ \/ /
+  | || | | | (_| |  __/>  < 
+ |___|_| |_|\__,_|\___/_/\_\
+                            */

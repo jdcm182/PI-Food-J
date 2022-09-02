@@ -6,7 +6,7 @@ export default function Landing() {
   return (
     <section className={styles.showcase} >
       <header>
-        <h2 className={styles.logo}>API Test</h2>
+        <h2 className={styles.logo}>API Food</h2>
         <div className={styles.toggle}></div>
       </header>
 
@@ -16,10 +16,9 @@ export default function Landing() {
       <div className={styles.overlay}></div>
 
       <div className={styles.text}>
-        <h2>Food</h2>
-        <h3>Experimenting with PI</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam officiis commodi impedit optio. Explicabo
-          voluptates unde reprehenderit quibusdam, maiores dolore.</p>
+        <h2>Food API</h2>
+        <h3>Spoonacular</h3>
+        <p>A SPA Individual Project</p>
         {/* <a href="">Enter</a> */}
         <a href="./">Enter</a>
       </div>
