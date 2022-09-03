@@ -3,7 +3,7 @@ import './App.css';
 import { Route } from 'react-router-dom'
 import Landing from './components/Landing.jsx'
 import NavBar from './components/NavBar.jsx'
-//import Main from './components/Main.jsx'
+import Main from './components/Main.jsx'
 
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       {/* <h1>Henry Food</h1> */}
       <Route exact path={'/'} component={Landing} />
       <Route path={'/recipes'} component={NavBar} />
-      {/* <Route path={'/recipes/main'} component={Main} /> */}
+      <Route path={'/recipes/main'} component={Main} />
     </div>
   );
 }

@@ -19,9 +19,9 @@ export default function NavBar() {
                 </ul>
             </nav>
 
-            {/* <div className={style.searchWrapper}>
-                <SearchBar />
-            </div> */}
+            <div className={style.searchWrapper}>
+                [SEARCH]{/* <SearchBar /> */}
+            </div>
 
         </div>
 

@@ -10,7 +10,8 @@
     background-color: rgba(94, 94, 94, 0.438);
     padding: .00125rem;
     margin-bottom: 1rem;
-    box-shadow: 0 0px 8px 1px rgb(255, 32, 32);
+    /* box-shadow: 0 0px 8px 1px rgb(255, 32, 32); */
+    box-shadow: 0 0px 8px 1px #186dcf;
 
     padding: 0 2rem;
 
@@ -18,8 +19,10 @@
 
 .logo {
     /* margin: 2rem; */
-    /*     background-color: red;
- */
+    /* background-color: red; */
+    color: #778da9;
+    font-weight: 600;
+
 }
 
 .menu {
@@ -32,6 +35,11 @@
 
     width: fit-content;
 
+}
+
+nav {
+    text-decoration: none;
+    color: white;
 }
 
 ul {
@@ -52,4 +60,9 @@ li {
 .searchWrapper {
     /*     background-color: blue;
  */
+}
+
+nav>ul>li>:visited {
+    color: #3c5f8d;
+
 }

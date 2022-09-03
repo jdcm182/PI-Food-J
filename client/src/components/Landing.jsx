@@ -20,7 +20,7 @@ export default function Landing() {
         <h3>Spoonacular</h3>
         <p>A SPA Individual Project</p>
         {/* <a href="">Enter</a> */}
-        <a href="./">Enter</a>
+        <a href="/recipes/main">Enter</a>
       </div>
 
 
