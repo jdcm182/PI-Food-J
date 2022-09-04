@@ -11,7 +11,8 @@ const router = Router();
 const recipesRouter = require('./recipesRouter.js')
 router.use('/recipes', recipesRouter)
 
-const diets = require('./')
+// const dietsRouter = require('./dietsRouter.js')
+// router.use('/diets', dietsRouter)
 
 
 module.exports = router;
