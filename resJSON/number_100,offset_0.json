@@ -2424,7 +2424,7 @@
                                     "localizedName": "oven",
                                     "image": "oven.jpg",
                                     "temperature": {
-                                        "number": 450.0,
+                                        "number": 450,
                                         "unit": "Fahrenheit"
                                     }
                                 }
@@ -7970,7 +7970,7 @@
             "creditsText": "Afrolems",
             "license": "CC BY 4.0",
             "sourceName": "Afrolems",
-            "pricePerServing": 60.0,
+            "pricePerServing": 60,
             "id": 716276,
             "title": "Doughnuts",
             "readyInMinutes": 45,
@@ -8950,7 +8950,7 @@
                                     "localizedName": "oven",
                                     "image": "oven.jpg",
                                     "temperature": {
-                                        "number": 350.0,
+                                        "number": 350,
                                         "unit": "Fahrenheit"
                                     }
                                 }
@@ -8999,7 +8999,7 @@
                                     "localizedName": "oven",
                                     "image": "oven.jpg",
                                     "temperature": {
-                                        "number": 350.0,
+                                        "number": 350,
                                         "unit": "Fahrenheit"
                                     }
                                 }
@@ -10863,7 +10863,7 @@
                                     "localizedName": "oven",
                                     "image": "oven.jpg",
                                     "temperature": {
-                                        "number": 375.0,
+                                        "number": 375,
                                         "unit": "Fahrenheit"
                                     }
                                 }
@@ -11558,7 +11558,7 @@
                                     "localizedName": "oven",
                                     "image": "oven.jpg",
                                     "temperature": {
-                                        "number": 200.0,
+                                        "number": 200,
                                         "unit": "Celsius"
                                     }
                                 }
@@ -11827,7 +11827,7 @@
                                     "localizedName": "oven",
                                     "image": "oven.jpg",
                                     "temperature": {
-                                        "number": 425.0,
+                                        "number": 425,
                                         "unit": "Fahrenheit"
                                     }
                                 }
@@ -13892,7 +13892,7 @@
                                     "localizedName": "oven",
                                     "image": "oven.jpg",
                                     "temperature": {
-                                        "number": 350.0,
+                                        "number": 350,
                                         "unit": "Fahrenheit"
                                     }
                                 }
@@ -15561,7 +15561,7 @@
                                     "localizedName": "oven",
                                     "image": "oven.jpg",
                                     "temperature": {
-                                        "number": 450.0,
+                                        "number": 450,
                                         "unit": "Fahrenheit"
                                     }
                                 }
@@ -17147,7 +17147,7 @@
                                     "localizedName": "oven",
                                     "image": "oven.jpg",
                                     "temperature": {
-                                        "number": 200.0,
+                                        "number": 200,
                                         "unit": "Celsius"
                                     }
                                 }
@@ -18645,7 +18645,7 @@
                                     "localizedName": "oven",
                                     "image": "oven.jpg",
                                     "temperature": {
-                                        "number": 200.0,
+                                        "number": 200,
                                         "unit": "Celsius"
                                     }
                                 }
@@ -18959,22 +18959,8 @@
     "number": 100,
     "totalResults": 5224,
     "LLAMADO_REALIZADO": "https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&offset=0&number=100&apiKey=d4fdbe137a484ece84ab306669344cc3",
-    "Date": "Sat, 03 Sep 2022 19:17:32 GMT",
-    "X-API-Quota-Request": 4.5,
-    "X-API-Quota-Used": 6.95,
-    "X-API-Quota-Left": 143.05,
-    "Report-To": {
-        "endpoints": [
-            {
-                "url": "https:\/\/a.nel.cloudflare.com\/report\/v3?s=0Zw9B9DAx8CmatOe3D9jOZDKqVS6MB9BXTYIA9UxZZEL1U4iSxsGdiGxfrheVain5SZXKvQo1P5CpKlpV2eK9X03gZ1lglss2FBgTcfg97CfgAR8yuER4f5g2OzklpcTs6MywgY%3D"
-            }
-        ],
-        "group": "cf-nel",
-        "max_age": 604800
-    },
-    "NEL": {
-        "success_fraction": 0,
-        "report_to": "cf-nel",
-        "max_age": 604800
-    }
+    "date": "Sun, 04 Sep 2022 20:07:37 GMT",
+    "X-API-Quota-Request": "4.5",
+    "X-API-Quota-Used": "102.49000000000001",
+    "X-API-Quota-Left": "47.50999999999999"
 }

@@ -1,0 +1,10 @@
+.cardsContainer {
+    border: 1px solid green;
+    /* background-color: black; */
+    padding: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    align-items: stretch;
+
+}

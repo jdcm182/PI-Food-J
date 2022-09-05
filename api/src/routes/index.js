@@ -11,6 +11,9 @@ const router = Router();
 const recipesRouter = require('./recipesRouter.js')
 router.use('/recipes', recipesRouter)
 
+const testRouter = require('./testRouter.js')
+router.use('/test', testRouter)
+
 // const dietsRouter = require('./dietsRouter.js')
 // router.use('/diets', dietsRouter)
 

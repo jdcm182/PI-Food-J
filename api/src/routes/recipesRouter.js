@@ -5,7 +5,7 @@ const { Recipe, Diet } = require('../db.js');
 
 require('dotenv').config();
 const API_KEY = process.env.YOUR_API_KEY;
-const MAX_AMOUNT = 2; // API's MAX AMOUNT: 100 items!
+const MAX_AMOUNT = 100; // API's MAX AMOUNT: 100 items!
 
 
 
@@ -28,9 +28,9 @@ router.get('/', async (req, res) => {
         // const apiRecipes = r.data.results
 
         // // // PARA NO GASTAR LOS REQUEST A LA API USO ARRAY HARDCODEADO!!!
+        // // import { data } from '../../../resJSON/number_100,offset_0.js';
         const data = require('../../../resJSON/number_100,offset_0.json');
         const apiRecipes = data.results;
-        //import { data } from '../../../resJSON/number_100,offset_0.js';
 
         console.log('--------------------------------------------------------------------')
         console.log('recipesRouter.jsx > router.get /recipes > apiRecipes: ', apiRecipes)

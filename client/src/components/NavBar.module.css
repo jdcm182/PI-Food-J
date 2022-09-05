@@ -62,7 +62,15 @@ li {
  */
 }
 
+nav>ul>li> {
+    text-decoration: none;
+}
+
 nav>ul>li>:visited {
     color: #3c5f8d;
+}
 
+nav>ul>li>:hover {
+    color: #2467be;
+    background-color: #0f2a4d;
 }
