@@ -5,7 +5,7 @@ import style from './RecipesGrid.module.css';
 export default function RecipesGrid(props) {
     return (
         <div className={style.cardsContainer}>
-            {/* RECIPES GRID */}
+            RECIPES GRID
 
             {props.recipes && props.recipes.map(r =>
                 <div key={"r" + r.id}>

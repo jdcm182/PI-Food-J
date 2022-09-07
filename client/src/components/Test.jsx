@@ -3,25 +3,38 @@ import axios from 'axios'
 //const { default: axios } = require('axios');
 import style from './Test.module.css'
 
+import { /* getAllRecipes, */ getRecipes2 } from '../actions';
+import { /* connect, */ useDispatch } from 'react-redux'
+
 function Test() {
 
-    //const dispatch = React.useDispatch();
+    const dispatch = useDispatch(); //React.useDispatch is not a function
 
     return (
         <div className={style.test}>
             Test
             <br />
-            <button onClick={handleClick}>dispatch!</button>
-            <button onClick={(e, num, offset) => apiToJSON(num || 5, offset || 0)}>api to JSON</button>
+            <button className={style.btnTest} onClick={handleDispatch}>dispatch!</button>
+            <button className={style.btnTest} onClick={(e, num, offset) => apiToJSON(num || 5, offset || 0)}>api to JSON</button>
+            <button className={style.btnTest} onClick={(e, num) => videogamesToJSON(num || 1)}>videogames to JSON</button>
+
+            <br />
+            <button className={style.btnTest} onClick={() => getRecipes2()}>getRecipes2</button>
+
+
         </div >
     )
 
-    async function handleClick() {
-        console.log('Test.jsx > handleClick()')
+    // FUNCIONA OK! obtiene recipes de la BD y envia al Reducer
+    async function handleDispatch() {
+        console.log('Test.jsx > handleDispatch()------------')
         // dispatch({ type: 'TEST', payload: '' })
         try {
+            // Esto FUNCIONA!! y actions.getAllRecipes NO!
             let resp = await axios.get(`http://localhost:3001/recipes`)
-            console.log('Test.jsx > handleClick() > resp: ', resp)
+            console.log('Test.jsx > handleDispatch() > resp: ', resp)
+            dispatch({ type: 'GET_ALL_RECIPES', payload: resp.data })
+
         } catch (e) {
             console.log(e)
         }
@@ -46,7 +59,26 @@ function Test() {
 
     }
 
+    async function videogamesToJSON(pagFrom) {
+        try {
+            //const pagFrom = 1;
+            let resp = await axios.get(`http://localhost:3001/test/vg/${pagFrom}`);
+            console.log('async function videogamesToJSON() ------------------')
+            console.log('resp: ', resp)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
 }
+
+/* export function mapDispatchToProps(dispatch) {
+    return {
+        getRecipes: dispatch(getAllRecipes());
+    }
+} */
+
+
 
 
 export default Test

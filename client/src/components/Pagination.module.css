@@ -1,0 +1,47 @@
+.btnT {
+  background-color: #777;
+}
+
+.actual {
+  background-color: rgb(255, 222, 74);
+}
+
+.normal {
+  background-color: rgb(218, 75, 75);
+}
+
+button:disabled,
+button[disabled] {
+  /* border: 1px solid #999999; */
+  background-color: #222;
+  border: 2px solid black;
+  color: #666666;
+  width: 2rem;
+}
+
+.container {
+  margin-bottom: 1.5rem;
+}
+
+/*Se pisa con buttons de Test.module.css*/
+button {
+  width: 2rem;
+  margin: 0;
+}
+
+/*  de index.css */
+/* 
+button {
+    background-color: rgb(218, 75, 75);
+    color: black;
+    width: 2rem;
+  }
+  
+  button:hover {
+    background-color: rgb(235, 161, 161);
+  }
+  
+  button:active {
+    background-color: rgb(161, 36, 36);
+  } 
+*/

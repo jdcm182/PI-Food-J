@@ -33,14 +33,16 @@ router.get('/', async (req, res) => {
         const apiRecipes = data.results;
 
         console.log('--------------------------------------------------------------------')
-        console.log('recipesRouter.jsx > router.get /recipes > apiRecipes: ', apiRecipes)
+        //console.log('recipesRouter.jsx > router.get /recipes > apiRecipes: ', apiRecipes)
+        console.log('recipesRouter.jsx > router.get /recipes > apiRecipes.length: ', apiRecipes.length)
 
 
         // // JOIN all recipes:[ DATABASE + API ] 
         const allRecipes = [...mydbRecipes, ...apiRecipes.map(r => extractMainKeys(r))];
         //const allRecipes = apiRecipes;//mydbRecipes.concat(apiRecipes);
         console.log('--------------------------------------------------------------------')
-        console.log('recipesRouter.jsx > router.get /recipes > allRecipes: ', allRecipes)
+        //console.log('recipesRouter.jsx > router.get /recipes > allRecipes: ', allRecipes)
+        console.log('recipesRouter.jsx > router.get /recipes > allRecipes.length: ', allRecipes.length)
 
 
         let subset = [];

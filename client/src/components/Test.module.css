@@ -1,12 +1,21 @@
 .test {
+    margin-top: 2rem;
     /* background-color: black; */
 }
 
-button {
+/*con componente button:
+ Se pisa con buttons de Pagination.module.css*/
+/* button */
+.btnTest {
     background-color: #1958a1;
     color: black;
     padding: .5rem;
     margin: 1rem;
+    width: fit-content;
+}
+
+.btn {
+    width: fit-content;
 }
 
 button:hover {
