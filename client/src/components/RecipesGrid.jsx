@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import RecipeCard from './RecipeCard.jsx';
 import style from './RecipesGrid.module.css';
 
 export default function RecipesGrid(props) {
+
+    console.log('RecipesGrid.jsx --- creating component')
+    console.log('props: ', props)
+
+    useEffect(() => {
+        console.log('RecipesGrid.jsx --- useEffect ---')
+    })
+
     return (
         <div className={style.cardsContainer}>
-            RECIPES GRID
+            <div>RECIPES GRID</div><br /><br /><br />
 
             {props.recipes && props.recipes.map(r =>
                 <div key={"r" + r.id}>

@@ -10,10 +10,9 @@
 
 import axios from "axios"
 
-/* 
-// // NO FUNCIONA!!
-export function getAllRecipes() {
-    console.log('👉 > actions > getRecipes()')
+
+export function getAllRecipes1() {
+    console.log('👉 > actions > getAllRecipes1()')
     return function (dispatch) {
         console.log('> actions > getRecipes > dispatch: ', dispatch)
         return fetch(`http://localhost:3001/recipes`)
@@ -25,12 +24,10 @@ export function getAllRecipes() {
             .then(log => console.log('> actions > getRecipes > fetch finalizado con: ', log))
     }
 }
- */
-export function getAllRecipes() {
-    console.log('👉 > actions > getRecipes()')
 
+export function getAllRecipes() {
+    console.log('👉 > actions > getAllRecipes()')
     return async function (dispatch) {
-        // POR QUE NUNCA SE EJECUTA ?????????????????
         try {
             let resp = await axios.get(`http://localhost:3001/recipes`)
             console.log('ACTIONS > getAllRecipes() > resp: ', resp)
@@ -52,6 +49,12 @@ export function getRecipes2() {
     }
 }
 
+export const getRecipes3 = () => async (dispatch) => {
+    console.log('ACTIONS > getRecipes2() ----------')
+    const response = await fetch('http://localhost:3001/recipes');
+    const data = await response.json();
+    dispatch({ type: 'GET_ALL_RECIPES', payload: data });
+}
 
 
     // return function (dispatch) {

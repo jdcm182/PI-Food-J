@@ -11,9 +11,11 @@ import store from './store'
 // se va {/* <React.StrictMode> */} y agrego Provider y BrowserRouter
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <React.StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>
   </Provider>
   ,
   document.getElementById('root')

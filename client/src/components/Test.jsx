@@ -3,27 +3,37 @@ import axios from 'axios'
 //const { default: axios } = require('axios');
 import style from './Test.module.css'
 
-import { /* getAllRecipes, */ getRecipes2 } from '../actions';
+import { getAllRecipes, /* getAllRecipes1, */ getRecipes2, getRecipes3 } from '../actions';
 import { /* connect, */ useDispatch } from 'react-redux'
 
-function Test() {
+function Test(props) {
 
     const dispatch = useDispatch(); //React.useDispatch is not a function
 
     return (
         <div className={style.test}>
-            Test
+            Test    <br />
+
+            <button className={style.btnTest} onClick={handleDispatch}>handleDispatch</button>
+            <button className={style.btnTest} onClick={() => dispatch(getAllRecipes())}>getAllRecipes</button>
+            {/* <button className={style.btnTest} onClick={() => dispatch(getAllRecipes1())}>getAllRecipes1</button> */}
+            <button className={style.btnTest} onClick={() => dispatch(getRecipes2())}>getRecipes2</button>
+            <button className={style.btnTest} onClick={() => dispatch(getRecipes3())}>getRecipes3</button>
             <br />
-            <button className={style.btnTest} onClick={handleDispatch}>dispatch!</button>
+
+            <button className={style.btnTest} onClick={props.setSubset2}>props.setSubset2()</button>
+            <br />
+
+            <br /><br /><br /><br />
             <button className={style.btnTest} onClick={(e, num, offset) => apiToJSON(num || 5, offset || 0)}>api to JSON</button>
             <button className={style.btnTest} onClick={(e, num) => videogamesToJSON(num || 1)}>videogames to JSON</button>
-
             <br />
-            <button className={style.btnTest} onClick={() => getRecipes2()}>getRecipes2</button>
+
 
 
         </div >
     )
+
 
     // FUNCIONA OK! obtiene recipes de la BD y envia al Reducer
     async function handleDispatch() {

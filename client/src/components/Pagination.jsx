@@ -1,6 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { setPage } from '../actions';
+// import { connect } from 'react-redux'
+// import { setPage } from '../actions';
 //import { NavLink } from 'react-router-dom';
 import style from './Pagination.module.css';
 
@@ -15,7 +15,7 @@ export function Pagination(props) {
     React.useEffect(() => {
         //pages = Math.ceil(props.recipes.length / props.itemsPerPage)
         console.log('Pagination.jsx > useEffect > props: ', props)
-    }, [])
+    })
 
     function handlePage(e) {
         if (e === '<') {
