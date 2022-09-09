@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import style from './NavBar.module.css'
-//import SearchBar from './SearchBar.jsx'
+import SearchBar from './SearchBar.jsx'
 
 export default function NavBar() {
     return (
@@ -20,7 +20,7 @@ export default function NavBar() {
             </nav>
 
             <div className={style.searchWrapper}>
-                [SEARCH]{/* <SearchBar /> */}
+                {/* [SEARCH] */}{<SearchBar />}
             </div>
 
         </div>

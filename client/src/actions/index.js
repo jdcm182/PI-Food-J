@@ -57,13 +57,24 @@ export const getRecipes3 = () => async (dispatch) => {
 }
 
 
-    // return function (dispatch) {
-    //     console.log('> actions > getRecipes > dispatch: ', dispatch)
-    //     return fetch(`http://localhost:3001/recipes`)
-    //         .then(response => response.json())
-    //         .then(recipes => {
-    //             console.log('Actions > getAllRecipes > 2do .then > recipes: ', recipes);
-    //             dispatch({ type: 'GET_ALL_RECIPES', payload: recipes })
-    //         })
-    //         .then(log => console.log('> actions > getRecipes > fetch finalizado con: ', log))
-    // }
+// return function (dispatch) {
+//     console.log('> actions > getRecipes > dispatch: ', dispatch)
+//     return fetch(`http://localhost:3001/recipes`)
+//         .then(response => response.json())
+//         .then(recipes => {
+//             console.log('Actions > getAllRecipes > 2do .then > recipes: ', recipes);
+//             dispatch({ type: 'GET_ALL_RECIPES', payload: recipes })
+//         })
+//         .then(log => console.log('> actions > getRecipes > fetch finalizado con: ', log))
+// }
+
+
+export function search(str) {
+    return function (dispatch) {
+        //                               /recipes?search={recipe}
+        axios.get(`http://localhost:3001/recipes?search=${str}`)
+            .then(r => r.data)
+            .then(d => dispatch({ type: 'SEARCH_RESULTS', payload: d }))
+            .catch(e => console.log(e));
+    }
+}

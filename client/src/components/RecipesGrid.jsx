@@ -13,7 +13,7 @@ export default function RecipesGrid(props) {
 
     return (
         <div className={style.cardsContainer}>
-            <div>RECIPES GRID</div><br /><br /><br />
+            {!props.recipes && <div>RECIPES GRID</div>}
 
             {props.recipes && props.recipes.map(r =>
                 <div key={"r" + r.id}>

@@ -19,9 +19,9 @@ export function Pagination(props) {
 
     function handlePage(e) {
         if (e === '<') {
-            if (props.page > 1) props.actPage(props.page - 1);
+            if (props.page > 1) props.setPage(props.page - 1);
         } else if (e === '>') {
-            if (props.page < pages) props.actPage(props.page + 1);
+            if (props.page < pages) props.setPage(props.page + 1);
         } else {
             props.setPage(e)
         }

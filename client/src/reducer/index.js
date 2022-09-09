@@ -21,6 +21,10 @@ export default function rootReducer(state = initialState, action) {
             ...state,
             diets: action.payload
         }
+        case 'SEARCH_RESULTS': return {
+            ...state,
+            recipes: action.payload
+        }
         default: return { ...state };
     };
 
