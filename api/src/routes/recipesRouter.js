@@ -6,7 +6,7 @@ const { Recipe, Diet } = require('../db.js');
 
 require('dotenv').config();
 const API_KEY = process.env.YOUR_API_KEY;
-const MAX_AMOUNT = 10//100; // API's MAX AMOUNT: 100 items!
+const MAX_AMOUNT = 100//100; // API's MAX AMOUNT: 100 items!
 
 
 

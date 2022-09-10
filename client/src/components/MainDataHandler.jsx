@@ -6,7 +6,10 @@ import { connect, useDispatch } from 'react-redux';
 import { Pagination } from './Pagination.jsx';
 //import axios from 'axios';
 
-import { getAllRecipes } from '../actions';
+import {
+    getAllRecipes1, getAllRecipes, getRecipes2,
+    getRecipesPT06, getRecipes3
+} from '../actions';
 
 const ITEMS_PER_PAGE = 9;
 
@@ -88,6 +91,15 @@ export /* default */ function Main(props) {
         // //getAllRecipes(); // No hace nada >> PORQUE HAY QUE dispatchEARLO!!
 
         //!props.recipes && dispatch(getAllRecipes()); //<-- No anda.. funcion si:
+
+
+        //dispatch(getAllRecipes())
+        //paginar();
+        //props.getRecipesToProps();
+        // /* props.recipes && */ paginar();
+
+
+        // ESTE BLOQUE ES EL QUE ESTA FUNCIONANDO OK..
         if (props.recipes !== undefined && props.recipes.length === 0) {
             // console.log('entró al if ⛔ [props.recipes] está vacío.. dispatch!')
             // getAllRecipes(); // No hace nada?!
@@ -99,6 +111,8 @@ export /* default */ function Main(props) {
         }
 
     }, [props.recipes, page]);
+
+
 
     // const fetchPosts = async () => {
     //     const res = await axios.get('http://localhost:3001/recipes')
@@ -131,5 +145,16 @@ function mapStateToProps(state) {
         recipes: state.recipes
     }
 }
-
-export default connect(mapStateToProps, null)(Main)
+/* 
+function mapDispatchToProps(dispatch) {
+    return {
+        getRecipesToProps: () => dispatch(getAllRecipes)
+        // getRecipesToProps: dispatch(getRecipesPT06)
+        // getRecipesToProps: dispatch(getRecipes3)
+        //getRecipesToProps: dispatch(getAllRecipes1)
+    }
+    //  getAllRecipes1, getAllRecipes, getRecipes2,
+    //  getRecipesPT06, getRecipes3
+}
+ */
+export default connect(mapStateToProps, null/* mapDispatchToProps */)(Main)

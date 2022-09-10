@@ -53,9 +53,25 @@ export const getRecipes3 = () => async (dispatch) => {
     console.log('ACTIONS > getRecipes2() ----------')
     const response = await fetch('http://localhost:3001/recipes');
     const data = await response.json();
+    console.log('💜getRecipes3 > dispatch: ', dispatch)
     dispatch({ type: 'GET_ALL_RECIPES', payload: data });
 }
 
+
+// Repaso M2 PT06 Diego
+export function getRecipesPT06() {
+    return (dispatch) => {
+        console.log('💛 por hacer el axios.get.. ')
+        axios.get("http://localhost:3001/recipes")
+            .then((response) => {
+                console.log('💛response.data: ', response.data)
+                const results = response.data;
+                console.log('💛dispatch: ', dispatch)
+                dispatch({ type: 'GET_ALL_RECIPES', payload: results });
+                // index.js:69 Uncaught (in promise) TypeError: dispatch is not a function at index.js:69:1
+            });
+    };
+}
 
 // return function (dispatch) {
 //     console.log('> actions > getRecipes > dispatch: ', dispatch)
