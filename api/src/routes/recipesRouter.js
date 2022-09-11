@@ -6,7 +6,7 @@ const { Recipe, Diet } = require('../db.js');
 
 require('dotenv').config();
 const API_KEY = process.env.YOUR_API_KEY;
-const MAX_AMOUNT = 100//100; // API's MAX AMOUNT: 100 items!
+const MAX_AMOUNT = 100; // API's MAX AMOUNT: 100 items!
 
 
 
@@ -15,8 +15,10 @@ const MAX_AMOUNT = 100//100; // API's MAX AMOUNT: 100 items!
 router.get('/', async (req, res) => {
 
     const { search } = req.query;
+
     console.log('recipesRouter > GET /recipes > req.query: ', req.query)
     console.log('recipesRouter > GET /recipes > search: ', search)
+
     if (search === undefined) {
 
         try {
@@ -69,47 +71,103 @@ router.get('/', async (req, res) => {
     }
     else { // search !== undefined     ?search={recipe}   <---  query
         //  // query > recipe:  { search: 'garlic' }
-        try {
 
-            let foundRecipesFromDB = await Recipe.findAll({
-                where: {
-                    name: {
-                        [Op.iLike]: '%' + search + '%'
-                    }
+        const searchStr = search.replace(/\s/g, '').toLowerCase(); //remove spaces
+
+        // Search in local DB
+        let foundRecipesFromDB = await Recipe.findAll({
+            where: {
+                name: {
+                    [Op.iLike]: '%' + search + '%'
                 }
-            })
-            console.log(`found ${foundRecipesFromDB.length} in local Database`)
-
-            const number = MAX_AMOUNT; //API's MAX AMOUNT: 100 items
-            let foundRecipesFromAPI = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=${number}&query=${search}&apiKey=${API_KEY}`)
-            console.log('foundRecipesFromAPI: ', foundRecipesFromAPI)
-            await console.log(`found ${foundRecipesFromAPI.data.results.length} in external API`)
-
-            let foundRecipes = foundRecipesFromDB.concat(foundRecipesFromAPI.data.results.map(r => extractMainKeys(r)));
-            console.log('foundRecipies.length: ', foundRecipes.length)
-            // limit amount of results
-            if (foundRecipes.length > 0) {
-                console.log('devolviendo arreglo foundRecipes... ')
-                if (foundRecipes.length <= MAX_AMOUNT) {
-                    console.log('devolviendo foundRecipes <= ', MAX_AMOUNT, `  - ${foundRecipes.length} recipes found`)
-                    return res.json(foundRecipes);
-                } else {
-                    const slicedRecipes = foundRecipes.slice(0, MAX_AMOUNT);
-                    console.log(`slicedRecipes.length: ${slicedRecipes.length}`)
-                    return res.json(slicedRecipes);
-                }
-            } else {
-                console.log('No se encontró ninguna receta con ', search)
-                return res.status(400).json({ error: `No se encontro ninguna receta con ${search}` });
             }
-            console.log('foundRecipes.length < 0 ????????????????????????????????????????????')
-            return res.status(400).json({ error: 'foundRecipes.length < 0 ?' });
+        })
+        console.log(`found ${foundRecipesFromDB.length} in local Database`)
+
+        // Search in API (w/cache)
+        const fileName = `search_${searchStr}`
+        const filePath = '../res_cache/';
+        const fileExtension = '.json';
+        const file = filePath + fileName + fileExtension;
+
+        let foundRecipesFromAPI = [];
+
+        const fs = require('fs');
+        if (!fs.existsSync(file)) {
+            console.log(`There´s no cache for "${search}" search string (${searchStr})... fetching from API`)
+            console.log(`The file ${file} doesn't exists`)
+
+            try {
+                const number = MAX_AMOUNT; //API's MAX AMOUNT: 100 items
+                const url = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=${number}&query=${search}&apiKey=`;
+                foundRecipesFromAPI = await axios.get(url + API_KEY)
+                // https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=100&query=qwerqweqwasd&apiKey=
+                // console.log('foundRecipesFromAPI: ', foundRecipesFromAPI)
+                await console.log(`found ${foundRecipesFromAPI.data.results.length} in external API`)
+                //console.log('foundRecipesFromAPI: ', foundRecipesFromAPI)
 
 
-        } catch (e) {
-            console.log(e)
-            return res.status(404).send({ error: e.message, e })
+                //-----------------------------------------------------------------
+                // save results to cache
+                let data = {};
+                data.results = foundRecipesFromAPI.data.results;
+                data.LLAMADO_REALIZADO = url;
+                data.date = foundRecipesFromAPI.headers.date;
+                data['X-API-Quota-Request'] = foundRecipesFromAPI.headers['x-api-quota-request'];
+                data['X-API-Quota-Used'] = foundRecipesFromAPI.headers['x-api-quota-used'];
+                data['X-API-Quota-Left'] = foundRecipesFromAPI.headers['x-api-quota-left'];
+
+                //guardar data en archivo JSON
+                const strData = JSON.stringify(data);
+                fs.writeFile(file, strData, (err) => {
+                    if (err) {
+                        throw err;
+                    }
+                    console.log("JSON data is saved to " + filePath + fileName);
+                }, null, 4);
+                //-----------------------------------------------------------------
+
+                foundRecipesFromAPI = foundRecipesFromAPI.data;
+                //console.log('foundRecipesFromAPI desp de pisarlo con el .data:  ', foundRecipesFromAPI);
+
+
+            } catch (e) {
+                console.log(e)
+                return res.status(404).send({ error: e.message, e })
+            }
+
+
+        } else { // ya existe cache para esa busqueda
+            //const data = require('../../../resJSON/number_100,offset_0.json');
+            console.log(`Found a cache file for ${search}! File: ${file}`)
+            const data = require('../../' + file);
+            foundRecipesFromAPI = data//.results;
+            //console.log('data: ', data)
+            //console.log('data.results: ', data.results)
+
         }
+
+        // join results from local DB & from external API into one
+        let foundRecipes = foundRecipesFromDB.concat(foundRecipesFromAPI/* .data */.results.map(r => extractMainKeys(r)));
+        console.log('foundRecipies.length: ', foundRecipes.length)
+        // limit amount of results
+        if (foundRecipes.length > 0) {
+            console.log('devolviendo arreglo foundRecipes... ')
+            if (foundRecipes.length <= MAX_AMOUNT) {
+                console.log('devolviendo foundRecipes <= ', MAX_AMOUNT, `  - ${foundRecipes.length} recipes found`)
+                return res.json(foundRecipes);
+            } else {
+                const slicedRecipes = foundRecipes.slice(0, MAX_AMOUNT);
+                console.log(`slicedRecipes.length: ${slicedRecipes.length}`)
+                return res.json(slicedRecipes);
+            }
+        } else {
+            console.log('No se encontró ninguna receta con ', search)
+            return res.status(400).json({ error: `No se encontro ninguna receta con ${search}` });
+        }
+        //console.log('foundRecipes.length < 0 ????????????????????????????????????????????')
+        return res.status(400).json({ error: 'foundRecipes.length < 0 ?' });
+
     }
 })
 
