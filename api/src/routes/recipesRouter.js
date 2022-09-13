@@ -171,6 +171,28 @@ router.get('/', async (req, res) => {
     }
 })
 
+//          /recipes/cache
+router.get('/cache', async (req, res) => {
+    const folder = '../res_cache/';
+    const fs = require('fs');
+
+    fs.readdir(folder, (err, files) => {
+        let cacheList = [];
+        files.forEach(file => {
+            console.log(file)
+            if (file.startsWith('search_')) {
+                let newName = '';
+                newName = file.replace('search_', '');
+                newName = newName.replace('.json', '');
+                cacheList.push(newName);
+            }
+        })
+        console.log(cacheList)
+        return res.send(cacheList);
+    })
+})
+
+
 module.exports = router;
 
 

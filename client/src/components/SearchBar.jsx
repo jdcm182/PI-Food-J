@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import style from './SearchBar.module.css';
 import { search } from '../actions'
 import { FaSearch } from 'react-icons/fa';
 
-export function SearchBar(props) {
+export function SearchBar({ search, setPage, searchSt }) {
 
     const [searchStr, setSearchStr] = React.useState('');
+
+    useEffect(() => {
+        //setSearchStr(searchSt);
+        document.getElementById('searchBox').value = searchSt;
+    }, [searchSt])
 
     let tempSearch = '';
 
@@ -18,16 +23,16 @@ export function SearchBar(props) {
 
     let handleSubmit = (e) => {
         e.preventDefault();
-        props.search(searchStr)
+        /* props. */search(searchStr);
+        /* props. */setPage(1);
     }
 
     return (
         <form onSubmit={e => handleSubmit(e)}>
 
             <div className={style.searchContainer}>
-                <input
+                <input className={style.searchInput}
                     id='searchBox'
-                    className={style.input}
                     type='text'
                     placeholder='Search...'
                     autoComplete='on'
@@ -45,10 +50,16 @@ export function SearchBar(props) {
 }
 
 
+function mapStateToProps(state) {
+    return {
+        searchSt: state.searchStr
+    }
+}
+
 function mapDispatchToProps(dispatch) {
     return {
         search: (str) => dispatch(search(str))
     }
 }
 
-export default connect(null, mapDispatchToProps)(SearchBar);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

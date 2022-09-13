@@ -1,5 +1,5 @@
 .cardsContainer {
-    border: 1px solid green;
+    /* border: 1px solid green; */
     /* background-color: black; */
     padding: 5px;
     display: grid;
@@ -7,4 +7,16 @@
     grid-gap: 1rem;
     align-items: stretch;
 
+}
+
+@media (max-width: 40em) {
+    .cardsContainer {
+        display: block;
+        /* width: 100%; */
+        /* align-items: center; */
+        /* justify-content: center; */
+        /* text-align: center; */
+        /* max-width: 40em; */
+        margin: 0 auto;
+    }
 }

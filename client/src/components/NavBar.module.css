@@ -37,6 +37,33 @@
 
 }
 
+@media (max-width: 40em) {
+    .menu {
+        margin: 0;
+    }
+}
+
+/*.searchWrapper,
+SearchBar, */
+/* .logo,
+.menu {
+    font-size: clamp(.8rem, .8rem + 1vw, 1rem);
+    font-size: .8rem;
+} */
+
+.logo,
+.menu {
+    font-size: 1rem;
+}
+
+@media (max-width: 40em) {
+
+    .logo,
+    .menu {
+        font-size: .8rem;
+    }
+}
+
 nav {
     text-decoration: none;
     color: white;
@@ -49,6 +76,12 @@ ul {
     align-items: center;
     gap: 2rem;
     text-decoration: none;
+}
+
+@media (max-width: 40em) {
+    ul {
+        gap: .85rem;
+    }
 }
 
 li {

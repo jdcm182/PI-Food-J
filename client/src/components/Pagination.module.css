@@ -2,6 +2,10 @@
   background-color: #777;
 }
 
+.btnT:hover {
+  background-color: #0078ff;
+}
+
 .actual {
   background-color: rgb(255, 222, 74);
 }

@@ -94,3 +94,10 @@ export function search(str) {
             .catch(e => console.log(e));
     }
 }
+
+
+export function setSearchStr(search) {
+    return function (dispatch) {
+        dispatch({ type: 'SET_SEARCH', payload: search });
+    }
+}

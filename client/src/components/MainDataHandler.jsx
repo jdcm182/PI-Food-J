@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import style from './MainDataHandler.module.css';
 import Test from './Test.jsx'
 import RecipesGrid from './RecipesGrid.jsx'
+import NavBar from './NavBar.jsx'
 import { connect, useDispatch } from 'react-redux';
 import { Pagination } from './Pagination.jsx';
 //import axios from 'axios';
@@ -10,6 +11,8 @@ import {
     getAllRecipes1, getAllRecipes, getRecipes2,
     getRecipesPT06, getRecipes3
 } from '../actions';
+import Filter from './Filter.jsx';
+import Cache from './Cache.jsx';
 
 const ITEMS_PER_PAGE = 9;
 
@@ -106,6 +109,10 @@ export /* default */ function Main(props) {
             dispatch(getAllRecipes())
         }
 
+
+        //dispatch(props.getCache())
+
+
         if (props.recipes && props.recipes.length > 0) {
             paginar();
         }
@@ -124,14 +131,26 @@ export /* default */ function Main(props) {
 
     return (
         <div className={style.container}>
-            {!props.recipes && "MAIN DATA HANDLER"}
-            <br />
-            {props.recipes && <Pagination recipes={props.recipes} itemsPerPage={ITEMS_PER_PAGE}
-                page={page} setPage={actPage} />}
-            {subset && <RecipesGrid recipes={subset} />}
-            {props.recipes && <Pagination recipes={props.recipes} itemsPerPage={ITEMS_PER_PAGE}
-                page={page} setPage={actPage} />}
-            {<Test setSubset2={setSubset2} />}
+            <NavBar setPage={actPage} />
+
+            <div className={style.main}>
+                <Filter />
+
+                <div className={style.central}>
+                    {!props.recipes && "MAIN DATA HANDLER"}
+                    <br />
+                    {props.recipes && <Pagination recipes={props.recipes} itemsPerPage={ITEMS_PER_PAGE}
+                        page={page} setPage={actPage} />}
+                    {subset && <RecipesGrid recipes={subset} />}
+                    {props.recipes && <Pagination recipes={props.recipes} itemsPerPage={ITEMS_PER_PAGE}
+                        page={page} setPage={actPage} />}
+                    {/* <Test setSubset2={setSubset2} /> */}
+                </div>
+
+                <Cache />
+
+            </div>
+
         </div>
     )
 
@@ -142,7 +161,8 @@ export /* default */ function Main(props) {
 function mapStateToProps(state) {
     console.log('1️⃣ MainDataHandler.jsx > mapStateToProps > state: ', state)
     return {
-        recipes: state.recipes
+        recipes: state.recipes,
+        cache: state.cache
     }
 }
 /* 

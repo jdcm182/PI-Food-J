@@ -2,7 +2,7 @@ import './App.css';
 
 import { Route } from 'react-router-dom'
 import Landing from './components/Landing.jsx'
-import NavBar from './components/NavBar.jsx'
+//import NavBar from './components/NavBar.jsx'
 import MainDataHandler from './components/MainDataHandler.jsx'
 
 
@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       {/* <h1>Henry Food</h1> */}
       <Route exact path={'/'} component={Landing} />
-      <Route path={'/recipes'} component={NavBar} />
+      {/* <Route path={'/recipes'} component={NavBar} /> */}
       <Route path={'/recipes/main'} component={MainDataHandler} />
     </div>
   );

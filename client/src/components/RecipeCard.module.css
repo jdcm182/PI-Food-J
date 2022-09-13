@@ -1,8 +1,8 @@
 .card {
     position: relative;
 
-    background: rgb(255, 255, 255);
-    background: linear-gradient(126deg, rgba(255, 255, 255, 1) 0%, rgba(236, 236, 236, 1) 100%);
+    background: rgb(18 34 48);
+    /* background: linear-gradient(126deg, rgba(255, 255, 255, 1) 0%, rgba(236, 236, 236, 1) 100%); */
     /* https://cssgradient.io/ */
 
     min-width: 8rem;
@@ -16,9 +16,18 @@
 
 }
 
+@media (max-width: 40em) {
+    .card {
+        margin: 0 auto;
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
+}
+
 .card:hover {
     /* -webkit-box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); */
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.445);
+    box-shadow: 0 0 8px rgb(14, 118, 255);
+
 }
 
 .infoContainer {

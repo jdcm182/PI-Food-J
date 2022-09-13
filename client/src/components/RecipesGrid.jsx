@@ -39,3 +39,27 @@ export default function RecipesGrid(props) {
         </div>
     )
 }
+
+
+// let ghostCards = [];
+// for (let i = 1; i <= 9; i++) { // 9: IMPORTAR ITEMS-x-PAGE
+//     /* const elem = `<RecipeCard key=rcg${i}
+//     id=null
+//     name=''
+//     image=''
+// />` */
+//     const elem = 'rcg' + i
+//     ghostCards.push(elem);
+// }
+
+// {/* !props.recipes && */ ghostCards.map(g =>
+//     <div key={"div" + g}>
+//     <RecipeCard key={g}
+//         id={null/* g.id */}
+//         name={''/* r.name */}
+//         image={''/* r.image */}
+//     /* dietType? */
+//     /* dishTypes={r.dishTypes} */
+//     />
+// </div>)
+// }
