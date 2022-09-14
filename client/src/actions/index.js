@@ -85,7 +85,7 @@ export function getRecipesPT06() {
 // }
 
 
-export function search(str) {
+export function doSearch(str) {
     return function (dispatch) {
         //                               /recipes?search={recipe}
         axios.get(`http://localhost:3001/recipes?search=${str}`)

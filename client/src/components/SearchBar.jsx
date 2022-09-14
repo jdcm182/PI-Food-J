@@ -1,30 +1,32 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import style from './SearchBar.module.css';
-import { search } from '../actions'
+import { doSearch, setSearchStr } from '../actions'
 import { FaSearch } from 'react-icons/fa';
 
-export function SearchBar({ search, setPage, searchSt }) {
-
-    const [searchStr, setSearchStr] = React.useState('');
+export function SearchBar({ dispatchSearch, setPage, searchStGlobal, setGlobalSearchStr }) {
+    const [search, setSearch] = React.useState('');
 
     useEffect(() => {
-        //setSearchStr(searchSt);
-        document.getElementById('searchBox').value = searchSt;
-    }, [searchSt])
+        //setSearch(searchSt);
+        document.getElementById('searchBox').value = searchStGlobal;
+    }, [searchStGlobal])
 
     let tempSearch = '';
 
     let handleChange = e => {
         tempSearch = e.target.value;
-        setSearchStr(e.target.value);
+        //setSearch(e.target.value)
         console.log('SearchBar > input onChange > handleChange > tempSearch: ', tempSearch)
     }
 
     let handleSubmit = (e) => {
         e.preventDefault();
-        /* props. */search(searchStr);
+        setSearch(tempSearch);
+        /* props. */dispatchSearch(/* search */tempSearch);
         /* props. */setPage(1);
+        //setSearch(tempSearch/* tempSearch */); // set localState
+        setGlobalSearchStr(tempSearch.toLowerCase()/* tempSearch *//* e.target.value */); // set globalState (for cache list)
     }
 
     return (
@@ -52,13 +54,14 @@ export function SearchBar({ search, setPage, searchSt }) {
 
 function mapStateToProps(state) {
     return {
-        searchSt: state.searchStr
+        searchStGlobal: state.searchStr
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        search: (str) => dispatch(search(str))
+        dispatchSearch: (str) => dispatch(doSearch(str)),
+        setGlobalSearchStr: (str) => dispatch(setSearchStr(str))
     }
 }
 

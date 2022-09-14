@@ -15,6 +15,10 @@
     cursor: pointer;
 }
 
+.activeFile {
+    background-color: blueviolet;
+}
+
 .file:hover {
     background-color: blueviolet;
 }

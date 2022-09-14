@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './Cache.module.css';
 import { /* useSelector, */ connect/* , useDispatch */ } from 'react-redux';
 //import { NavLink } from 'react-router-dom';
-import { search, setSearchStr } from '../actions'
+import { doSearch, setSearchStr } from '../actions'
 
 import axios from 'axios';
 
-export /* default */ function Cache(props) {
+export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr }) {
 
 
     const [files, setFiles] = useState([]);
+
+    useEffect(() => {
+        //!files && files.length === 0 && handleClick();
+        //setFiles(handleClick())
+        files && files.length === 0 && handleClick();
+    }/* , [files] */)
 
     //const dispatch = useDispatch();
 
@@ -31,14 +37,14 @@ export /* default */ function Cache(props) {
         <div className={style.cache}>
             CACHE <br />
             {files && files.map((f, i) => (
-                <div key={'files' + i} className={style.file}
+                <div key={'files' + i} className={searchStr === f ? style.activeFile : style.file}
                     onClick={() => {
                         //dispatch(search(f));
                         //dispatch(setSearchStr(f));
-                        props.search(f);
-                        props.setSearchStr(f);
+                        /* props. */search(f);
+                        /* props. */setSearchStr(f);
                     }}>
-                    {f} < br />
+                    {f ? f : 'ALL'} < br />
                 </div>
             )
             )
@@ -69,21 +75,26 @@ export /* default */ function Cache(props) {
             let resp = await axios.get(`http://localhost:3001/recipes/cache`);
             console.log('💫handleClick > resp: ', resp)
             setFiles(resp.data);
-            setSearchStr(resp.data);
+            //setSearchStr(resp.data);
             //setpage <-- 1
+            return resp.data;
         } catch (e) {
             console.log(e)
         }
     }
-
-
-
 }
+
 function mapDispatchToProps(dispatch) {
     return {
-        search: (str) => dispatch(search(str)),
+        search: (str) => dispatch(doSearch(str)),
         setSearchStr: (str) => dispatch(setSearchStr(str))
     }
 }
 
-export default connect(null, mapDispatchToProps)(Cache);
+function mapStateToProps(state) {
+    return {
+        searchStr: state.searchStr
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cache);
