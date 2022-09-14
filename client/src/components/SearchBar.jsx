@@ -18,6 +18,7 @@ export function SearchBar({ dispatchSearch, setPage, searchStGlobal, setGlobalSe
         tempSearch = e.target.value;
         //setSearch(e.target.value)
         console.log('SearchBar > input onChange > handleChange > tempSearch: ', tempSearch)
+        setGlobalSearchStr(tempSearch.toLowerCase());
     }
 
     let handleSubmit = (e) => {
@@ -26,7 +27,7 @@ export function SearchBar({ dispatchSearch, setPage, searchStGlobal, setGlobalSe
         /* props. */dispatchSearch(/* search */tempSearch);
         /* props. */setPage(1);
         //setSearch(tempSearch/* tempSearch */); // set localState
-        setGlobalSearchStr(tempSearch.toLowerCase()/* tempSearch *//* e.target.value */); // set globalState (for cache list)
+        //setGlobalSearchStr(tempSearch.toLowerCase()/* tempSearch *//* e.target.value */); // set globalState (for cache list)
     }
 
     return (

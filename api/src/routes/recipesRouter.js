@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
             // const r = await axios.get(url)
             // const apiRecipes = r.data.results
 
-            // // // PARA NO GASTAR LOS REQUEST A LA API USO ARRAY HARDCODEADO!!!
+            // // // PARA NO GASTAR LOS REQUEST A LA API USO ARRAY GUARDADO!!!
             // // import { data } from '../../../resJSON/number_100,offset_0.js';
             const data = require('../../../resJSON/number_100,offset_0.json');
             const apiRecipes = data.results;
@@ -202,6 +202,7 @@ function extractMainKeys(recipe) {
         image: recipe.image,
         name: recipe.title,
         /* dietType: ??? */
+        diets: recipe.diets,
         dishTypes: recipe.dishTypes,
         summary: recipe.summary,
         healthScore: recipe.healthScore,

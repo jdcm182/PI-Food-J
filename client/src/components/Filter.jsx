@@ -1,11 +1,40 @@
 import React from 'react';
 import style from './Filter.module.css';
-import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { useSelector/* , useDispatch */ } from 'react-redux';
+//import { NavLink } from 'react-router-dom';
+
+
 
 export default function Filter() {
 
-    const types = useSelector((state) => state.dietTypes)
+    const types = useSelector((state) => state.dietTypes);
+    const recipes = useSelector((state) => state.recipes);
+
+    let tipos = []; // [{type, count}, {type, count}, {type, count}, {type, count}, {type, count}]
+    function addDietType(arr, key, diet) {
+        let found = arr.find(obj => obj[key] === diet);
+        //found ? found.count++ : found = { key: diet, count: 0 }   // <-- key es variable!! como la uso con esta sintaxis?
+        if (found) found.count++
+        else { found = {}; found[key] = diet; found.count = 0; arr.push(found); }
+
+        // let found = tipos.find(obj => obj['type'] === diet);
+        // found ? found.count++ : found = { type: diet, count: 0 }
+        // console.log('found: ', found)
+        // tipos.push(found);
+    }
+
+    /*
+        var result = jsObjects.find(obj => {
+          return obj.b === 6
+        })
+    */
+
+    recipes.forEach(r => {
+        //r.diets && tipos.push(r.diets[0]);
+        r.diets.forEach((d) => { addDietType(tipos, 'type', d) })
+    });
+
+
 
     return (
         <div className={style.filters}>
@@ -17,9 +46,12 @@ export default function Filter() {
                     className={style.fil} >
                     {t.name} < br />
                 </div>
-            )
-            )
-            }
+            ))}
+
+            <br />
+
+            {tipos.map((t, i) => (<div key={'t' + i}>{t.type + `(${t.count})`}</div>))}
+
         </div >
 
     )
