@@ -29,10 +29,23 @@ function Test(props) {
             <button className={style.btnTest} onClick={(e, num) => videogamesToJSON(num || 1)}>videogames to JSON</button>
             <br />
 
+            <br /><br /><br /><br />
+            <button className={style.btnTest} onClick={() => contarTipos()}>count diet types</button>
+
 
 
         </div >
     )
+
+    ///test/contarTipos
+    async function contarTipos() {
+        try {
+            let resp = await axios.get(`http://localhost:3001/test/contarTipos`)
+            console.log('contarTipos >  resp.data: ', resp.data);
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
 
     // FUNCIONA OK! obtiene recipes de la BD y envia al Reducer

@@ -1,0 +1,42 @@
+[
+    {
+        "type": "gluten free",
+        "count": 675
+    },
+    {
+        "type": "dairy free",
+        "count": 606
+    },
+    {
+        "type": "lacto ovo vegetarian",
+        "count": 380
+    },
+    {
+        "type": "vegan",
+        "count": 230
+    },
+    {
+        "type": "paleolithic",
+        "count": 147
+    },
+    {
+        "type": "primal",
+        "count": 218
+    },
+    {
+        "type": "whole 30",
+        "count": 169
+    },
+    {
+        "type": "pescatarian",
+        "count": 136
+    },
+    {
+        "type": "ketogenic",
+        "count": 38
+    },
+    {
+        "type": "fodmap friendly",
+        "count": 30
+    }
+]

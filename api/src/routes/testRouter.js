@@ -115,4 +115,83 @@ router.get('/vg/:num', async (req, res) => {
     }
 })
 
+
+// Para tener una idea de que tipos de diets hay en 900 recetas
+//           /test/contarTipos
+router.get('/contarTipos', (req, res) => {
+
+    let recipes = [];
+
+    // number_100,offset_0.json           ---> i : +100
+    // number_100,offset_900.json
+    const fs = require('fs')
+    let hundreds = 0;
+    let file = `../res_cache/number_100,offset_${hundreds}.json`;
+    console.log(`\n${file} exists? ${fs.existsSync(file)}`)
+    while (fs.existsSync(file)) {
+
+        const data = require('../../' + file);
+        //loadedRecipes = data.results;
+        console.log('data.results.length:  ', data.results.length)
+        recipes = recipes.concat(data.results/* loadedRecipes */);
+        console.log('concat.. recipes.length:  ', recipes.length)
+
+        hundreds += 100;
+        file = `../res_cache/number_100,offset_${hundreds}.json`;
+        console.log(`\n${file} exists? ${fs.existsSync(file)}`)
+    }
+
+
+    let tipos = []; // [{type, count}, {type, count}, {type, count}, {type, count}, {type, count}]
+    function addDietType(arr, key, diet) {
+        let found = arr.find(obj => obj[key] === diet);
+        //found ? found.count++ : found = { key: diet, count: 0 }   // <-- key es variable!! como la uso con esta sintaxis?
+        if (found) found.count++
+        else { found = {}; found[key] = diet; found.count = 0; arr.push(found); }
+
+        // let found = tipos.find(obj => obj['type'] === diet);
+        // found ? found.count++ : found = { type: diet, count: 0 }
+        // console.log('found: ', found)
+        // tipos.push(found);
+    }
+
+    recipes.forEach(r => {
+        //r.diets && tipos.push(r.diets[0]);
+        r.diets.forEach((d) => { addDietType(tipos, 'type', d) })
+    });
+
+    /*
+        var result = jsObjects.find(obj => {
+          return obj.b === 6
+        })
+    */
+
+    //guardar resultado en archivo json:
+
+    /*
+        const strData = JSON.stringify(gamesFromAPI, null, 4);
+        fs.writeFile(file, strData, (err) => {
+            if (err) {
+                console.log('error: ', err)
+                //throw err;
+            }
+            console.log("JSON data is saved as " + file)
+        }, null, 4);
+ 
+        return res.json(gamesFromAPI);
+    */
+
+    const strData = JSON.stringify(tipos, null, 4);
+    const outputFile = '../res_cache/all900dietTypes!.json';
+    fs.writeFile(outputFile, strData, (err) => {
+        if (err) {
+            console.log('error: ', err)
+        }
+        console.log('JSON data saved as ' + outputFile)
+    }, null, 4);
+
+    return res.json(strData);
+
+})
+
 module.exports = router;

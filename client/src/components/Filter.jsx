@@ -23,17 +23,16 @@ export default function Filter() {
         // tipos.push(found);
     }
 
-    /*
-        var result = jsObjects.find(obj => {
-          return obj.b === 6
-        })
-    */
-
     recipes.forEach(r => {
         //r.diets && tipos.push(r.diets[0]);
         r.diets.forEach((d) => { addDietType(tipos, 'type', d) })
     });
 
+    /*
+        var result = jsObjects.find(obj => {
+          return obj.b === 6
+        })
+    */
 
 
     return (

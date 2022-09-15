@@ -144,7 +144,7 @@ export /* default */ function Main(props) {
                     {subset && <RecipesGrid recipes={subset} />}
                     {props.recipes && <Pagination recipes={props.recipes} itemsPerPage={ITEMS_PER_PAGE}
                         page={page} setPage={actPage} />}
-                    {/* <Test setSubset2={setSubset2} /> */}
+                    {<Test setSubset2={setSubset2} />}
                 </div>
 
                 <Cache />
