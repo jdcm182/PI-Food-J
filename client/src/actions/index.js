@@ -101,3 +101,9 @@ export function setSearchStr(search) {
         dispatch({ type: 'SET_SEARCH', payload: search });
     }
 }
+
+export function setFilter(recipes) {
+    return function (dispatch) {
+        dispatch({ type: 'SET_FILTER', payload: recipes });
+    }
+}

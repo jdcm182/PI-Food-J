@@ -16,7 +16,7 @@ import Cache from './Cache.jsx';
 
 const ITEMS_PER_PAGE = 9;
 
-
+let selectedRecipes;
 
 
 // Pagination, Sort & Filter
@@ -53,21 +53,24 @@ export /* default */ function Main(props) {
         //
 
 
-        if (props.recipes !== undefined && props.recipes.length > 0) {
+
+
+
+        if (selectedRecipes !== undefined && selectedRecipes.length > 0) {
 
             console.log('seteando subset...')
-            const sub = props.recipes.slice(
+            const sub = selectedRecipes.slice(
                 (page - 1) * ITEMS_PER_PAGE,
                 (page * ITEMS_PER_PAGE) /* - 1 */
             )
             setSubset(sub);
             // console.log('sub: ', sub);
-            // //setSubset(props.recipes) // <-- ¿React No llega a enterarse del cambio!?
-            // //setSubset( prev=> (...prev, props.recipes))
-            // console.log('estado local actualizado con props.recipes 🎈 subset')
-        } else { console.log('No entró al if de:\n 🎈if (props.recipes !== undefined && props.recipes.length > 0)') }
+            // //setSubset(selectedRecipes) // <-- ¿React No llega a enterarse del cambio!?
+            // //setSubset( prev=> (...prev, selectedRecipes))
+            // console.log('estado local actualizado con selectedRecipes 🎈 subset')
+        } else { console.log('No entró al if de:\n 🎈if (selectedRecipes !== undefined && selectedRecipes.length > 0)') }
 
-        // props.recipes && setSubset(props.recipes.slice(
+        // selectedRecipes && setSubset(selectedRecipes.slice(
         //     (page - 1) * ITEMS_PER_PAGE,
         //     (page * ITEMS_PER_PAGE) /* - 1 */
         // ));
@@ -76,7 +79,7 @@ export /* default */ function Main(props) {
     }
 
     function setSubset2() {
-        setSubset(props.recipes);
+        setSubset(selectedRecipes);
         //console.log('MainDataHandler.jsx > subset: ', subset)
     }
 
@@ -84,27 +87,34 @@ export /* default */ function Main(props) {
 
 
     useEffect(() => {
+
+
+        selectedRecipes = props.recipes;
+        if (props.filteredRecipes && props.filteredRecipes.length > 0) {
+            selectedRecipes = props.filteredRecipes;
+        }
+
         // console.log('MainDataHandler.jsx ----------useEffect----------')
-        // console.log('props.recipes: ', props.recipes)
-        // console.log('props.recipes.length: ', props.recipes.length)
-        // // props.recipes && props.recipes.length === 0 && dispatch(getAllRecipes())
-        // // props.recipes && props.recipes.length === 0 && paginar();
+        // console.log('selectedRecipes: ', selectedRecipes)
+        // console.log('selectedRecipes.length: ', selectedRecipes.length)
+        // // selectedRecipes && selectedRecipes.length === 0 && dispatch(getAllRecipes())
+        // // selectedRecipes && selectedRecipes.length === 0 && paginar();
         // console.log('MainDataHandler.jsx > useEffect > subset: ', subset)
         // //paginar(); // entra en Loop infinito
         // //getAllRecipes(); // No hace nada >> PORQUE HAY QUE dispatchEARLO!!
 
-        //!props.recipes && dispatch(getAllRecipes()); //<-- No anda.. funcion si:
+        //!selectedRecipes && dispatch(getAllRecipes()); //<-- No anda.. funcion si:
 
 
         //dispatch(getAllRecipes())
         //paginar();
         //props.getRecipesToProps();
-        // /* props.recipes && */ paginar();
+        // /* selectedRecipes && */ paginar();
 
 
         // ESTE BLOQUE ES EL QUE ESTA FUNCIONANDO OK..
-        if (props.recipes !== undefined && props.recipes.length === 0) {
-            // console.log('entró al if ⛔ [props.recipes] está vacío.. dispatch!')
+        if (selectedRecipes !== undefined && selectedRecipes.length === 0) {
+            // console.log('entró al if ⛔ [selectedRecipes] está vacío.. dispatch!')
             // getAllRecipes(); // No hace nada?!
             dispatch(getAllRecipes())
         }
@@ -113,11 +123,11 @@ export /* default */ function Main(props) {
         //dispatch(props.getCache())
 
 
-        if (props.recipes && props.recipes.length > 0) {
+        if (selectedRecipes && selectedRecipes.length > 0) {
             paginar();
         }
 
-    }, [props.recipes, page]);
+    }, [props.recipes, props.filteredRecipes, page]);
 
 
 
@@ -137,12 +147,12 @@ export /* default */ function Main(props) {
                 <Filter />
 
                 <div className={style.central}>
-                    {!props.recipes && "MAIN DATA HANDLER"}
+                    {!selectedRecipes && "MAIN DATA HANDLER"}
                     <br />
-                    {props.recipes && <Pagination recipes={props.recipes} itemsPerPage={ITEMS_PER_PAGE}
+                    {selectedRecipes && <Pagination recipes={selectedRecipes} itemsPerPage={ITEMS_PER_PAGE}
                         page={page} setPage={actPage} />}
                     {subset && <RecipesGrid recipes={subset} />}
-                    {props.recipes && <Pagination recipes={props.recipes} itemsPerPage={ITEMS_PER_PAGE}
+                    {selectedRecipes && <Pagination recipes={selectedRecipes} itemsPerPage={ITEMS_PER_PAGE}
                         page={page} setPage={actPage} />}
                     {<Test setSubset2={setSubset2} />}
                 </div>
@@ -162,6 +172,7 @@ function mapStateToProps(state) {
     console.log('1️⃣ MainDataHandler.jsx > mapStateToProps > state: ', state)
     return {
         recipes: state.recipes,
+        filteredRecipes: state.filteredRecipes,
         cache: state.cache
     }
 }
