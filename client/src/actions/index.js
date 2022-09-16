@@ -102,8 +102,8 @@ export function setSearchStr(search) {
     }
 }
 
-export function setFilter(recipes) {
+export function setFilters(recipes) {
     return function (dispatch) {
-        dispatch({ type: 'SET_FILTER', payload: recipes });
+        dispatch({ type: 'SET_FILTERS', payload: recipes });
     }
 }

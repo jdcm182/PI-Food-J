@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import style from './Cache.module.css';
 import { /* useSelector, */ connect/* , useDispatch */ } from 'react-redux';
 //import { NavLink } from 'react-router-dom';
-import { doSearch, setSearchStr } from '../actions'
+import { doSearch, setSearchStr, setFilters } from '../actions'
 
 import axios from 'axios';
 
-export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr }) {
+export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr, setFilters }) {
 
 
     const [files, setFiles] = useState([]);
@@ -43,6 +43,7 @@ export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr
                         //dispatch(setSearchStr(f));
                         /* props. */search(f);
                         /* props. */setSearchStr(f);
+                        setFilters([]);
                     }}>
                     {f ? f : 'ALL'} < br />
                 </div>
@@ -87,7 +88,8 @@ export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr
 function mapDispatchToProps(dispatch) {
     return {
         search: (str) => dispatch(doSearch(str)),
-        setSearchStr: (str) => dispatch(setSearchStr(str))
+        setSearchStr: (str) => dispatch(setSearchStr(str)),
+        setFilters: (arr) => dispatch(setFilters(arr))
     }
 }
 

@@ -29,6 +29,14 @@
     text-decoration: none;
 }
 
+.selectedF {
+    background-color: bisque;
+}
+
+.normalF {
+    background-color: black;
+}
+
 /*
 li {
     text-decoration: none;

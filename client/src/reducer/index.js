@@ -78,9 +78,14 @@ export default function rootReducer(state = initialState, action) {
             ...state,
             searchStr: action.payload
         }
-        case 'SET_FILTER': return {
+        case 'SET_FILTERS': return {
             ...state,
             filteredRecipes: action.payload
+        }
+        case 'SET_DIET_TYPES': return {
+            ...state,
+            //dietTypes.type[action.payload] = !dietTypes.type[action.payload]
+            dietTypes: action.payload
         }
         default: return { ...state };
     };

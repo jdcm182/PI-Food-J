@@ -2,7 +2,7 @@ import React from 'react';
 import style from './Filter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 //import { NavLink } from 'react-router-dom';
-import { setFilter } from '../actions';
+import { setFilters } from '../actions';
 
 
 export default function Filter() {
@@ -49,12 +49,13 @@ export default function Filter() {
             {types && types.map((t, i) => (
                 <div
                     key={'fil' + i}
-                    className={style.fil}
+                    className={[style.fil, t.filter ? style.selectedF : style.normalF].join(' ')}
                     onClick={() => { /* alert(t.name) */
-                        dispatch(setFilter(filterByType(t.type)));
+                        toggleFilter(types, t.type);
+                        dispatch(setFilters(filterByType(t.type)));
                     }}>
 
-                    {t.name} < br />
+                    {t.name/* +tipos.find(tp=>tp.name===) */} < br />
                 </div>
             ))}
 
@@ -68,6 +69,11 @@ export default function Filter() {
 
     function filterByType(type) {
         return recipes.filter(r => r.diets.includes(type))
+    }
+
+    function toggleFilter(arr, type) {
+        let itemFound = arr.find(obj => obj.type === type);
+        if (itemFound) itemFound.filter = !itemFound.filter;
     }
 
 }

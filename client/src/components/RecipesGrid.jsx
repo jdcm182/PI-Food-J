@@ -22,6 +22,7 @@ export default function RecipesGrid(props) {
                         name={r.name}
                         image={r.image}
                         /* dietType? */
+                        diets={r.diets}
                         dishTypes={r.dishTypes}
                     />
                 </div>)}
