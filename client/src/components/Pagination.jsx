@@ -8,13 +8,13 @@ import style from './Pagination.module.css';
 
 export function Pagination(props) {
 
-    console.log('Pagination.jsx > props : ', props)
+    //console.log('Pagination.jsx > props : ', props)
 
     let pages = Math.ceil(props.recipes && (props.recipes.length / props.itemsPerPage));
 
     React.useEffect(() => {
         //pages = Math.ceil(props.recipes.length / props.itemsPerPage)
-        console.log('Pagination.jsx > useEffect > props: ', props)
+        //console.log('Pagination.jsx > useEffect > props: ', props)
     })
 
     function handlePage(e) {
@@ -34,7 +34,7 @@ export function Pagination(props) {
     //arr.push('<');
     for (let i = 1; i <= pages; i++) arr.push(i);
     //arr.push('>');
-    console.log('Pagination > arr: ', arr)
+    //console.log('Pagination > arr: ', arr)
     //<div> Pages: {arr.map((e, i) => <NavLink to={'/'} key={'nl' + i}> {e} </NavLink>)} </div>
     return (
         <div className={style.container}> Pages:

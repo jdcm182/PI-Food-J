@@ -51,7 +51,8 @@ const dietTypes = [
 
 const initialState = {
     recipes: [],
-    filteredRecipes: [],
+    allRecipes: [],
+    //filteredRecipes: [],
     diets: [],
     dietTypes,
     searchStr: '',
@@ -64,7 +65,8 @@ export default function rootReducer(state = initialState, action) {
     switch (action.type) {
         case 'GET_ALL_RECIPES': return {
             ...state,
-            recipes: action.payload
+            recipes: [...action.payload],
+            allRecipes: [...action.payload]
         }
         case 'GET_ALL_DIETS': return {
             ...state,
@@ -80,13 +82,32 @@ export default function rootReducer(state = initialState, action) {
         }
         case 'SET_FILTERS': return {
             ...state,
-            filteredRecipes: action.payload
+            //filteredRecipes: action.payload
+            recipes: action.payload
         }
         case 'SET_DIET_TYPES': return {
             ...state,
             //dietTypes.type[action.payload] = !dietTypes.type[action.payload]
             dietTypes: action.payload
         }
+        case 'CLEAR_FILTERS':
+            const diets = [...state.dietTypes]; // {...} nooo! es array!
+            console.log('REDUCER > CLEAR_FILTERS > diets: ', diets)
+            for (const diet of diets) { // diets is not iterable
+                diet.filter = false;
+            }
+            /* for (let i = 0; i < diets.length; i++)
+                diets[i].filter = false; */
+            return {
+                ...state,
+                dietTypes: diets,
+                filteredRecipes: state.recipes
+            }
+        case 'RESTORE_RECIPES': console.log('REDUCER > RESTORE_RECIPES')
+            return {
+                ...state,
+                recipes: [...state.allRecipes]
+            }
         default: return { ...state };
     };
 

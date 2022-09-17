@@ -8,10 +8,14 @@ export default function RecipeCard(props) {
     const allTypes = useSelector((state) => state.dietTypes);
 
     const myDietTypes = [];
+    /* if (allTypes) { */
     if (props.diets) props.diets.forEach(d => {
         const globalItem = allTypes.find(g => g.type === d);
         myDietTypes.push(globalItem);
     });
+    /* } else {
+        console.log('ERROR: allTypes.find > TypeError: types.find is not a function')
+    } */
     //allTypes.filter(global => global.type ===)
 
     return (

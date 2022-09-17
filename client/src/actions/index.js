@@ -107,3 +107,13 @@ export function setFilters(recipes) {
         dispatch({ type: 'SET_FILTERS', payload: recipes });
     }
 }
+
+export function clearFilters() {
+    return function (dispatch) {
+        dispatch({ type: 'CLEAR_FILTERS', payload: '' })
+    }
+}
+
+export function restoreRecipes() {
+    return { type: 'RESTORE_RECIPES', payload: '' }
+}

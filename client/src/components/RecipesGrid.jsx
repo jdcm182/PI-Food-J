@@ -4,11 +4,11 @@ import style from './RecipesGrid.module.css';
 
 export default function RecipesGrid(props) {
 
-    console.log('RecipesGrid.jsx --- creating component')
-    console.log('props: ', props)
+    //console.log('RecipesGrid.jsx --- creating component')
+    //console.log('props: ', props)
 
     useEffect(() => {
-        console.log('RecipesGrid.jsx --- useEffect ---')
+        //console.log('RecipesGrid.jsx --- useEffect ---')
     })
 
     return (

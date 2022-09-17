@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import style from './Cache.module.css';
 import { /* useSelector, */ connect/* , useDispatch */ } from 'react-redux';
 //import { NavLink } from 'react-router-dom';
-import { doSearch, setSearchStr, setFilters } from '../actions'
+import { doSearch, setSearchStr, setFilters, clearFilters } from '../actions'
 
 import axios from 'axios';
 
-export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr, setFilters }) {
+export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr, clearAllFilters/* setFilters */ }) {
 
 
     const [files, setFiles] = useState([]);
@@ -39,11 +39,13 @@ export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr
             {files && files.map((f, i) => (
                 <div key={'files' + i} className={searchStr === f ? style.activeFile : style.file}
                     onClick={() => {
+                        clearAllFilters();
                         //dispatch(search(f));
                         //dispatch(setSearchStr(f));
                         /* props. */search(f);
                         /* props. */setSearchStr(f);
-                        setFilters([]);
+                        //setFilters([]);
+
                     }}>
                     {f ? f : 'ALL'} < br />
                 </div>
@@ -89,7 +91,8 @@ function mapDispatchToProps(dispatch) {
     return {
         search: (str) => dispatch(doSearch(str)),
         setSearchStr: (str) => dispatch(setSearchStr(str)),
-        setFilters: (arr) => dispatch(setFilters(arr))
+        setFilters: (arr) => dispatch(setFilters(arr)),
+        clearAllFilters: () => dispatch(clearFilters())
     }
 }
 
