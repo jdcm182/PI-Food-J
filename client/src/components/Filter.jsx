@@ -31,6 +31,25 @@ export default function Filter() {
         console.log('ERROR: TypeError: types.find is not a function')
     } */
 
+    const handleOnClick = (t, types) => {
+        /* alert(t.name) */
+        try {
+            toggleFilter(types, t.type);
+            //dispatch(setFilters(filterByType(t.type)));
+            dispatch(setFilters(filterByTypes(getActiveFilters())));
+            // VOLVER A CONTAR CANTIDADES
+            /* typeCount = countRecipes(filteredRecipes);
+            typeCount.forEach((t) => {
+                console.log('types.find  >  types:  ', types)
+                const found = types.find((f) => f.type === t)
+                if (found) found.count = t.count;
+            }); */
+        } catch (e) {
+            toggleFilter(types, t.type);
+            console.log(e);
+        }
+    }
+
     return (
         <div className={style.filters}>
             FILTER <br />
@@ -39,23 +58,7 @@ export default function Filter() {
                 <div
                     key={'fil' + i}
                     className={[style.fil, t.filter ? style.selectedF : style.normalF].join(' ')}
-                    onClick={() => { /* alert(t.name) */
-                        try {
-                            toggleFilter(types, t.type);
-                            //dispatch(setFilters(filterByType(t.type)));
-                            dispatch(setFilters(filterByTypes(getActiveFilters())));
-                            // VOLVER A CONTAR CANTIDADES
-                            /* typeCount = countRecipes(filteredRecipes);
-                            typeCount.forEach((t) => {
-                                console.log('types.find  >  types:  ', types)
-                                const found = types.find((f) => f.type === t)
-                                if (found) found.count = t.count;
-                            }); */
-                        } catch (e) {
-                            toggleFilter(types, t.type);
-                            console.log(e);
-                        }
-                    }}>
+                    onClick={() => { handleOnClick(t, types) }}>
 
                     { }
                     {t.name + ` (${getCount(t.type)})`}
@@ -151,10 +154,12 @@ export default function Filter() {
 
     function filterByTypes(typesArray) {
         //return recipes.filter(r => r.diets.includes(type))
-        let res = recipes;
+        let res = [...recipes]
+
         // console.log('filterByTypes(typesArray) > res = recipes : ', res)
         // console.log('typesArray: ', typesArray)
         dispatch(restoreRecipes());
+
         typesArray.forEach(type => {
             const aux = res.filter(r => r.diets.includes(type));
             if (aux && aux.length > 0) res = aux;
@@ -172,7 +177,11 @@ export default function Filter() {
 
     function toggleFilter(arr, type) {
         let itemFound = arr.find(obj => obj.type === type);
-        if (itemFound) itemFound.filter = !itemFound.filter;
+        if (itemFound) {
+            itemFound.filter = !itemFound.filter;
+            /* dispatch(setFilters(arr)) */
+        }
+
     }
 
 }
