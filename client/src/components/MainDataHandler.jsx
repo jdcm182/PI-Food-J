@@ -101,7 +101,9 @@ export /* default */ function Main({ recipes, filteredRecipes, cache }) {
 
                 </div>
 
-                <Cache />
+                <div className={style.column}>
+                    <Cache />
+                </div>
 
             </div>
 
