@@ -45,14 +45,23 @@
     flex-wrap: wrap;
 }
 
+
+.active,
 .diet {
-    /*item*/
     font-size: .8rem;
-    background-color: rgba(70, 179, 241, 0.733);
     padding: .1rem;
     margin: .1rem;
     width: fit-content;
     border-radius: .225rem;
+}
+
+.active {
+    background-color: rgba(175, 224, 41, 0.733);
+}
+
+.diet {
+    /*item*/
+    background-color: rgba(70, 179, 241, 0.733);
 }
 
 .imgContainer {

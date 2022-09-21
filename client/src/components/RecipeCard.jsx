@@ -29,7 +29,8 @@ export default function RecipeCard(props) {
                 </div>
                 <div className={style.dietTypes}>
                     {myDietTypes.map((t, i) =>
-                        <div className={style.diet}
+                        <div className={/* filtering(t.type) */
+                            t.filter ? style.active : style.diet}
                             key={`dt${i}`}>
                             {t.name}
                         </div>
@@ -41,4 +42,8 @@ export default function RecipeCard(props) {
             </Link>
         </div>
     )
+
+    /* const filtering = (type) => {
+
+    } */
 }
