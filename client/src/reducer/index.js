@@ -74,7 +74,8 @@ export default function rootReducer(state = initialState, action) {
         }
         case 'SEARCH_RESULTS': return {
             ...state,
-            recipes: action.payload
+            recipes: action.payload,
+            allRecipes: [...action.payload]
         }
         case 'SET_SEARCH': return {
             ...state,
@@ -92,18 +93,24 @@ export default function rootReducer(state = initialState, action) {
         }
         case 'CLEAR_FILTERS':
             const diets = [...state.dietTypes]; // {...} nooo! es array!
-            console.log('REDUCER > CLEAR_FILTERS > diets: ', diets)
+            console.log('REDUCER > CLEAR_FILTERS > ')
+            console.log('diets: ', diets)
             for (const diet of diets) { // diets is not iterable
                 diet.filter = false;
             }
             /* for (let i = 0; i < diets.length; i++)
                 diets[i].filter = false; */
+            console.log('diets: ', diets)
             return {
                 ...state,
                 dietTypes: diets,
                 filteredRecipes: state.recipes
             }
         case 'RESTORE_RECIPES': console.log('REDUCER > RESTORE_RECIPES')
+            console.log('REDUCER > RESTORE_RECIPES > ')
+            console.log('state.allRecipes', state.allRecipes)
+            console.log('state.recipes', state.recipes)
+
             return {
                 ...state,
                 recipes: [...state.allRecipes]

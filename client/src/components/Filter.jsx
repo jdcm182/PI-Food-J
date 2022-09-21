@@ -12,6 +12,9 @@ export default function Filter() {
     const types = useSelector((state) => state.dietTypes);
     const recipes = useSelector((state) => state.recipes);
     //const filteredRecipes = useSelector((state) => state.filteredRecipes);
+    const allRecipes = useSelector((state) => state.allRecipes);
+
+    console.log('types: ', types)
 
     const dispatch = useDispatch();
 
@@ -23,7 +26,7 @@ export default function Filter() {
     // copiar count de typeCount en types
     /* if (types) { */
     typeCount.forEach((t) => {
-        console.log('types.find  >  types:  ', types)
+        //console.log('types.find  >  types:  ', types)
         const found = types.find((f) => f.type === t)
         if (found) found.count = t.count;
     });
@@ -34,7 +37,12 @@ export default function Filter() {
     const handleOnClick = (t, types) => {
         /* alert(t.name) */
         try {
+            console.log('💥>>>> handleOnClick >>>>💥')
+            console.log('types', types)
+            console.log('toggleFilter...')
             toggleFilter(types, t.type);
+            console.log('types', types)
+            console.log('dispatch.. setFilters.. filterByTypes.. getActiveFilters')
             //dispatch(setFilters(filterByType(t.type)));
             dispatch(setFilters(filterByTypes(getActiveFilters())));
             // VOLVER A CONTAR CANTIDADES
@@ -73,6 +81,66 @@ export default function Filter() {
         </div >
     )
     //{t.count ? t.name + ` (${t.count})` : t.name} < br />
+
+
+
+    function getActiveFilters() {
+        const res = [];
+        types.forEach(t => {
+            if (t.filter === true) res.push(t.type)
+        })
+        console.log('🕳 getActiveFilters() > res[]: ', res)
+        return res;
+    }
+
+    function filterByTypes(typesArray) {
+        //return recipes.filter(r => r.diets.includes(type))
+        let res = [...allRecipes]
+
+        // console.log('filterByTypes(typesArray) > res = recipes : ', res)
+        // console.log('typesArray: ', typesArray)
+
+        //dispatch(restoreRecipes());
+
+        typesArray.forEach(type => {
+            const aux = res.filter(r => r.diets.includes(type));
+            if (aux && aux.length > 0) res = aux;
+            else { throw new Error('Filter doesn`t match any recipe') }
+            //console.log('filterByTypes(typesArray) > res = res.filter... : ', res)
+        });
+
+        return res;
+    }
+
+    /* function filterByType(type) {
+        return recipes.filter(r => r.diets.includes(type))
+    } */
+
+
+    function toggleFilter(arr, type) {
+        // const copyArr = [...arr];
+
+        //dispatch(restoreRecipes());
+
+
+        let itemFound = arr.find(obj => obj.type === type);
+        if (itemFound) {
+            itemFound.filter = !itemFound.filter;
+            // dispatch(setFilters(copyArr))
+            // si desactivo filtro, actualizar cards...
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
 
     function getCount(type) {
         let res = 0;
@@ -143,45 +211,8 @@ export default function Filter() {
 
 
 
-    function getActiveFilters() {
-        const res = [];
-        types.forEach(t => {
-            if (t.filter === true) res.push(t.type)
-        })
-        console.log('getActiveFilters() > res[]: ', res)
-        return res;
-    }
-
-    function filterByTypes(typesArray) {
-        //return recipes.filter(r => r.diets.includes(type))
-        let res = [...recipes]
-
-        // console.log('filterByTypes(typesArray) > res = recipes : ', res)
-        // console.log('typesArray: ', typesArray)
-        dispatch(restoreRecipes());
-
-        typesArray.forEach(type => {
-            const aux = res.filter(r => r.diets.includes(type));
-            if (aux && aux.length > 0) res = aux;
-            else { throw new Error('Filter doesn`t match any recipe') }
-            //console.log('filterByTypes(typesArray) > res = res.filter... : ', res)
-        });
-
-        return res;
-    }
-
-    /* function filterByType(type) {
-        return recipes.filter(r => r.diets.includes(type))
-    } */
 
 
-    function toggleFilter(arr, type) {
-        let itemFound = arr.find(obj => obj.type === type);
-        if (itemFound) {
-            itemFound.filter = !itemFound.filter;
-            /* dispatch(setFilters(arr)) */
-        }
 
-    }
 
 }
