@@ -53,6 +53,8 @@
     margin: .1rem;
     width: fit-content;
     border-radius: .225rem;
+
+    z-index: 10;
 }
 
 .active {
