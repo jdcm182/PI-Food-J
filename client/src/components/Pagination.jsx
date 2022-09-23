@@ -37,7 +37,7 @@ export function Pagination(props) {
     //console.log('Pagination > arr: ', arr)
     //<div> Pages: {arr.map((e, i) => <NavLink to={'/'} key={'nl' + i}> {e} </NavLink>)} </div>
     return (
-        <div className={style.container}> Pages:
+        <div className={style.container}> {/* Pages: */}
             {props.page === 1 ? <button disabled>&lt;</button> : <button onClick={() => handlePage('<')} className={style.btnT} > &lt; </button>}
             {/* {<button onClick={() => handlePage('<')} className={style.btnT}> &lt; </button>} */}
             {arr.map((e, i) =>

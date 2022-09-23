@@ -92,7 +92,7 @@ export /* default */ function Main({ recipes, filteredRecipes, cache }) {
 
                 <div className={style.central}>
                     {!recipes && "MAIN DATA HANDLER"}
-                    <br />
+
                     {recipes && <Pagination recipes={recipes} itemsPerPage={ITEMS_PER_PAGE}
                         page={page} setPage={actPage} />}
                     {subset && <RecipesGrid recipes={subset} />}

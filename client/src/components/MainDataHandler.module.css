@@ -1,5 +1,5 @@
 .container {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     /* background-color: red; */
     color: #778da9;
     padding: 2px;
@@ -14,7 +14,7 @@
 
 .main {
     width: 100%;
-
+    margin-top: 1.5rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -27,6 +27,7 @@
     /* border: 1px solid aqua; */
     flex-grow: .8;
     flex-shrink: 1;
+    /* https://stackoverflow.com/questions/54378993/css-three-columns-the-outer-two-variable-width-but-wrapping-their-content-the */
 }
 
 .column {

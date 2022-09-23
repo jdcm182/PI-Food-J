@@ -52,7 +52,7 @@ export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr
             )
             )
             }
-            <button className={style.btn} onClick={handleClick} >Cargar</button>
+            {/* <button className={style.btn} onClick={handleClick} >Cargar</button> */}
         </div >
 
         /*
