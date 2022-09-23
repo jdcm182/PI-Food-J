@@ -1,5 +1,7 @@
 .btnT {
-  background-color: #777;
+  /* background-color: #777; */
+  background-color: #535353;
+  color: #777;
 }
 
 .btnT:hover {
@@ -7,11 +9,14 @@
 }
 
 .actual {
-  background-color: rgb(255, 222, 74);
+  /* background-color: rgb(255, 222, 74); */
+  background-color: rgb(190, 190, 190);
 }
 
 .normal {
-  background-color: rgb(218, 75, 75);
+  /* background-color: rgb(218, 75, 75); */
+  background-color: #141526;
+  color: #777;
 }
 
 button:disabled,

@@ -24,10 +24,13 @@
 .central {
     /* background-color: #111; */
     max-width: 75%;
-
+    /* border: 1px solid aqua; */
+    flex-grow: .8;
+    flex-shrink: 1;
 }
 
 .column {
     /* align-items: center; */
     margin: 0 auto;
+    /* border: 1px solid white; */
 }

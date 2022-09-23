@@ -29,11 +29,14 @@ export default function RecipeCard(props) {
                 </div>
                 <div className={style.dietTypes}>
                     {myDietTypes.map((t, i) =>
+
                         <div className={/* filtering(t.type) */
                             t.filter ? style.active : style.diet}
                             key={`dt${i}`}>
                             {t.name}
                         </div>
+
+
                     )}
                 </div>
                 <div className={style.imgContainer}>

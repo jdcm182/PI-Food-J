@@ -40,5 +40,20 @@
 
 
 body {
-  background-color: #1b263b;
+  /* background-color: #1b263b; */
+  background-image: url('https://wallpapercave.com/wp/wp3416319.jpg');
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+}
+
+a {
+  text-decoration: none;
+}
+
+link {
+  text-decoration: none;
+}
+
+nav {
+  text-decoration: none;
 }

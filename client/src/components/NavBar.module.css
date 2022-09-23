@@ -7,11 +7,13 @@
     justify-content: space-between;
     align-items: center;
 
-    background-color: rgba(94, 94, 94, 0.438);
+    background-color: #1e1e1e;
+    box-shadow: 0 0px 15px 5px #000;
+    /* background-color: rgba(94, 94, 94, 0.438); */
+    /* box-shadow: 0 0px 8px 1px rgb(255, 32, 32); */
+
     padding: .00125rem;
     margin-bottom: 1rem;
-    /* box-shadow: 0 0px 8px 1px rgb(255, 32, 32); */
-    box-shadow: 0 0px 8px 1px #186dcf;
 
     padding: 0 2rem;
 
