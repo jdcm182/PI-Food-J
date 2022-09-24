@@ -17,5 +17,8 @@ router.use('/test', testRouter)
 // const dietsRouter = require('./dietsRouter.js')
 // router.use('/diets', dietsRouter)
 
+const detailRouter = require('./detailRouter.js')
+router.use('/detail', detailRouter)
+
 
 module.exports = router;

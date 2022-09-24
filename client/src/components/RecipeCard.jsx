@@ -20,7 +20,8 @@ export default function RecipeCard(props) {
 
     return (
         <div className={style.card}>
-            <Link to="">
+            <Link to={`/detail/${props.id}`}
+                onClick={() => 0/* getDetail() */}>
 
                 <div className={style.infoContainer}>
                     <div className={style.cardTitle}>

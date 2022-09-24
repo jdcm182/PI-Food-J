@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom'
 import Landing from './components/Landing.jsx'
 //import NavBar from './components/NavBar.jsx'
 import MainDataHandler from './components/MainDataHandler.jsx'
+import Detail from './components/Detail';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Route exact path={'/'} component={Landing} />
       {/* <Route path={'/recipes'} component={NavBar} /> */}
       <Route path={'/recipes/main'} component={MainDataHandler} />
+      <Route path={'/detail/:id'} component={Detail} />
     </div>
   );
 }

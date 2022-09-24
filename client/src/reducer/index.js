@@ -56,7 +56,8 @@ const initialState = {
     diets: [],
     dietTypes,
     searchStr: '',
-    cache: []
+    //cache: [],
+    detail: {}
 }
 
 
@@ -110,11 +111,14 @@ export default function rootReducer(state = initialState, action) {
             console.log('REDUCER > RESTORE_RECIPES > ')
             console.log('state.allRecipes', state.allRecipes)
             console.log('state.recipes', state.recipes)
-
             return {
                 ...state,
                 recipes: [...state.allRecipes]
             }
+        case 'SET_DETAIL': return {
+            ...state,
+            detail: action.payload
+        }
         default: return { ...state };
     };
 

@@ -117,3 +117,12 @@ export function clearFilters() {
 export function restoreRecipes() {
     return { type: 'RESTORE_RECIPES', payload: '' }
 }
+
+
+export function getDetail(id) {
+    return function (dispatch) {
+        return fetch(`http://localhost:3001/detail/${id}`)
+            .then(response => response.json())
+            .then(detail => dispatch({ type: 'SET_DETAIL', payload: detail }))
+    }
+}
