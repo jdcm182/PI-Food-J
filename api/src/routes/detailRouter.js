@@ -11,7 +11,7 @@ const API_KEY = process.env.YOUR_API_KEY;
 
 const extractDetailsFromAPI = (recipe) => {
     console.log('>> detailRouter.js > extractDetailsFromAPI: ')
-    console.log('recipe: ', recipe)
+    //console.log('recipe: ', recipe)
     const obj = {
         id: recipe.id,
         image: recipe.image,
@@ -25,7 +25,7 @@ const extractDetailsFromAPI = (recipe) => {
         //cuisines: recipe.cuisines, // array
         //extendedIngredients array[{}]
     }
-    console.log('obj: ', obj)
+    //console.log('obj: ', obj)
     return obj;
 }
 
@@ -41,20 +41,62 @@ router.get('/:id', async (req, res) => {
         // GET /detail/B2 --> BD
         if (id[0] === 'B') {
             //
+            //
+            //
+            //            
             console.log('ID pertenece a item de la Base de Datos local')
+            //
+            //
+            //
+            //
         } else {
             // GET /detail/11 --> API
-            try {
-                const url = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
-                const r = await axios.get(url);
-                if (r) {
-                    const recipe = extractDetailsFromAPI(r.data);
-                    return res.json(recipe);
+
+            // Get from API (w/cache)
+            const fileName = `detail_${id}`;
+            const filePath = '../res_cache/';
+            const fileExtension = '.json';
+            const file = filePath + fileName + fileExtension;
+            const fs = require('fs');
+            if (!fs.existsSync(file)) {
+                console.log(`The file ${file} doesn't exists`)
+                console.log(`There´s no cache for recipe id: "${id}". Fetching from API`)
+
+                try {
+                    const url = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
+                    const r = await axios.get(url);
+                    if (r) {
+                        const recipe = extractDetailsFromAPI(r.data);
+
+                        // save results to cache:
+                        const strData = JSON.stringify(r.data);
+                        fs.writeFile(file, strData, (err) => {
+                            if (err) { throw err; }
+                            console.log("JSON data was saved to ", file)
+                        }, null, 4);
+
+
+                        return res.json(recipe);
+                    }
+                } catch (e) {
+                    console.log(e)
+                    return res.send({ error: 'Error al intentar traer detalle de la API' })
                 }
-            } catch (e) {
-                console.log(e)
-                return res.send({ error: 'Error al intentar traer detalle de la API' })
+
+            } else { // ya existe cache para esa receta
+                console.log(`Found a cache file for recipe id: ${id}! \n File: ${file}`)
+                try {
+                    const recipe = require('../../' + file);
+                    //console.log('recipe: ', recipe)
+                    const obj = extractDetailsFromAPI(recipe);
+                    //console.log('obj: ', obj)
+                    return res.json(obj);
+                } catch (e) {
+                    console.log('error: ', e)
+                }
             }
+
+
         }
     }
 });

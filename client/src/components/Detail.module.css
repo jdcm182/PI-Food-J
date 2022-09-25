@@ -1,3 +1,56 @@
 .detail {
     color: gray;
 }
+
+.image {
+    /**/
+}
+
+.dietType,
+.dishType {
+    color: black;
+    margin: 1rem;
+    width: fit-content;
+    margin: auto;
+    padding: .25rem;
+    border-radius: .8rem;
+}
+
+.dietType {
+    background-color: chartreuse;
+}
+
+.dishType {
+    background-color: rgb(43, 188, 255);
+}
+
+.dishContainer,
+.dietContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.stepByStepContainer {
+    /**/
+    /* font-size: larger; */
+}
+
+.stepsContainer {
+    /**/
+    /* font-size: medium; */
+}
+
+.stepItem {
+    /**/
+}
+
+.stepNumber {
+    font-size: 4rem;
+}
+
+.ingredientImg,
+.equipmentImg {
+    width: 2rem;
+    height: 2rem;
+}
