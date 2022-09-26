@@ -34,28 +34,26 @@ export /* default */ function Main({ recipes, filteredRecipes, cache }) {
 
     function actPage(p) { setPage(p); }
 
-    /*  LOGICA DE PAGINACION*/
-    async function paginar() {
 
-        // console.log('----------------------funcion paginar----------------------')
-
-
-        if (recipes !== undefined && recipes.length > 0) {
-
-            //console.log('seteando subset...')
-            const sub = recipes.slice(
-                (page - 1) * ITEMS_PER_PAGE,
-                (page * ITEMS_PER_PAGE) /* - 1 */
-            )
-            setSubset(sub);
-
-        } else { console.log('No entró al if de:\n if (recipes !== undefined && recipes.length > 0)') }
-
-    }
 
 
     useEffect(() => {
 
+
+        /*  LOGICA DE PAGINACION*/
+        async function paginar() {
+            // console.log('----------------------funcion paginar----------------------')
+            if (recipes !== undefined && recipes.length > 0) {
+                //console.log('seteando subset...')
+                const sub = recipes.slice(
+                    (page - 1) * ITEMS_PER_PAGE,
+                    (page * ITEMS_PER_PAGE) /* - 1 */
+                )
+                setSubset(sub);
+
+            } else { console.log('No entró al if de:\n if (recipes !== undefined && recipes.length > 0)') }
+
+        }
 
         //selectedRecipes = props.recipes;
         /* if (props.filteredRecipes && props.filteredRecipes.length > 0) {
@@ -71,7 +69,7 @@ export /* default */ function Main({ recipes, filteredRecipes, cache }) {
             paginar();
         }
 
-    }, [recipes, page]);
+    }, [recipes, page, dispatch]);
 
 
 

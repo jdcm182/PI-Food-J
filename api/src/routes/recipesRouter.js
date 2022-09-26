@@ -24,10 +24,67 @@ router.get('/', async (req, res) => {
         try {
 
             // GET recipes from DATABASE:
-            const mydbRecipes = await Recipe.findAll({ include: Diet });
-            console.log('--------------------------------------------------------------------')
-            console.log('recipesRouter.jsx > router.get /recipes > mydbRecipes: ', mydbRecipes)
+            const mydbRecipes = await Recipe.findAll({ include: { model: Diet/* , as: 'dietsDB' */, attributes: ['type'] } })
+            /*const mydbRecipes = await Recipe.findAll(
+                {
+                include: // Diet
+                {
+                    model: Diet, as: 'dietsDB'// , attributes: ['type']
+                }      // , attributes: type 
+            });*/ //  ReferenceError: type is not defined
 
+            console.log('\n----------------------------------------------------------')
+            //console.log('recipesRouter.jsx > router.get /recipes > mydbRecipes: ', /* JSON.stringify */(mydbRecipes))
+            //console.log('mydbRecipes: ', mydbRecipes)
+            console.log('\nLimpiando array de diets..\n')
+            //en diets necesito solo un arreglo de strings (dietType) y no de objetos
+            let cleanRecipesFromDB = [];
+            mydbRecipes.forEach(r => {
+                const aux = extractMainKeys(r);
+                cleanRecipesFromDB.push(aux);
+            });
+            console.log('cleanRecipesFromDB: ', JSON.stringify(cleanRecipesFromDB))
+
+            /* // No me deja modificar el array!!!!! POR QUEEEEEEEEE???????????????
+            let newArr = [...mydbRecipes];
+            let auxDiets = [];
+            newArr = newArr.map(recipe => {
+                console.log('recipe: ', JSON.stringify(recipe))
+                if (recipe.diets) {
+                    recipe['kkkkkkkkkkk'] = recipe.diets.map(d => {
+                        console.log('d.type: ', d.type)
+                        auxDiets.push(d.type);
+                        return d.type
+                    })
+                    recipe.kikiki = [...auxDiets];
+                    recipe['lalalalalala'] = [...auxDiets];
+                }
+                return recipe;
+            });
+            newArr.popopo = auxDiets;
+            console.log('newArray: ', JSON.stringify(newArr))
+
+            console.log('newArray: ', JSON.stringify(newArr))
+            */
+            /*{    //  No me deja modificar el array!!!!! POR QUEEEEEEEEE???????????????
+            if (recipe.diets) {
+                const newDietTypes = [];
+                recipe.kk = recipe.diets.map(diet => {
+                    diet.type && newDietTypes.push(diet.type);
+                    return diet.type;
+                });
+                recipe.diet = [...newDietTypes];
+                cleanRecipes.push(recipe);
+                //recipe.kk = newDietTypes;
+                recipe['kk2'] = newDietTypes;
+                console.log('cleanRecipes: ', JSON.stringify(cleanRecipes))
+                return recipe;
+            }
+        } 
+        );
+            console.log('cleanRecipes: ', JSON.stringify(cleanRecipes))
+            console.log('clean2: ', JSON.stringify(clean2))
+*/
             // // GET recipes from Spoonacular API
             // // offset  0 - The number of results to skip(between 0 and 900).
             // const offset = 0;
@@ -48,17 +105,22 @@ router.get('/', async (req, res) => {
 
 
             // // JOIN all recipes:[ DATABASE + API ] 
-            const allRecipes = [...mydbRecipes, ...apiRecipes.map(r => extractMainKeys(r))];
+            //const allRecipes = [...mydbRecipes, ...apiRecipes.map(r => extractMainKeys(r))];
+            const allRecipes = [...cleanRecipesFromDB, ...apiRecipes.map(r => extractMainKeys(r))];
             //const allRecipes = apiRecipes;//mydbRecipes.concat(apiRecipes);
             console.log('--------------------------------------------------------------------')
             //console.log('recipesRouter.jsx > router.get /recipes > allRecipes: ', allRecipes)
             console.log('recipesRouter.jsx > router.get /recipes > allRecipes.length: ', allRecipes.length)
 
+            //console.log('allRecipes: ', JSON.stringify(allRecipes))
 
             let subset = [];
             subset = allRecipes.slice(0, MAX_AMOUNT);
             //console.log('enviando array subset: ' , allRecipes.json() )
             //console.log('array: ', JSON.stringify(subset))
+
+
+            //console.log('\n\n\n\nsubset: ', subset)
 
             return res.json(subset); /* JSON.stringify(allRecipes) *//* status(201). */
             //return res.json(allRecipes); /* JSON.stringify(allRecipes) *//* status(201). */
@@ -149,7 +211,7 @@ router.get('/', async (req, res) => {
 
         // join results from local DB & from external API into one
         let foundRecipes = foundRecipesFromDB.concat(foundRecipesFromAPI/* .data */.results.map(r => extractMainKeys(r)));
-        console.log('foundRecipies.length: ', foundRecipes.length)
+        console.log('\n >> (search) foundRecipes.length: ', foundRecipes.length)
         // limit amount of results
         if (foundRecipes.length > 0) {
             console.log('devolviendo arreglo foundRecipes... ')
@@ -197,16 +259,26 @@ module.exports = router;
 
 
 function extractMainKeys(recipe) {
+    let dietTypes = [];
+
+    if (recipe.id && recipe.id[0] === 'B') {
+        if (recipe.diets) {
+            recipe.diets.forEach(d => dietTypes.push(d.type));
+        }
+    } else {
+        dietTypes = recipe.diets;
+    }
+
     const obj = {
         id: recipe.id,
         image: recipe.image,
         name: recipe.title,
-        /* dietType: ??? */
-        diets: recipe.diets,
+        // dietType: ??? 
+        diets: dietTypes, // recipe.diets,
         dishTypes: recipe.dishTypes,
         summary: recipe.summary,
         healthScore: recipe.healthScore,
-        /*  stepByStep: ??? */
+        stepByStep: recipe.stepByStep
     }
     return obj;
 }

@@ -2,25 +2,25 @@ import React from 'react';
 import style from './Filter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 //import { NavLink } from 'react-router-dom';
-import { setFilters, restoreRecipes } from '../actions';
+import { setFilters/* , restoreRecipes */ } from '../actions';
 
 
 export default function Filter() {
 
-    console.log('----------------- function Filter() -----------------')
+    //console.log('----------------- function Filter() -----------------')
 
     const types = useSelector((state) => state.dietTypes);
     const recipes = useSelector((state) => state.recipes);
     //const filteredRecipes = useSelector((state) => state.filteredRecipes);
     const allRecipes = useSelector((state) => state.allRecipes);
 
-    console.log('types: ', types)
+    //console.log('types: ', types)
 
     const dispatch = useDispatch();
 
     // [{type, count}, {type, count}, {type, count}, {type, count}, {type, count}]
     let typeCount /* = []; typeCount */ = countRecipes(recipes);
-    console.log('typeCount: ', typeCount)
+    //console.log('typeCount: ', typeCount)
 
 
     // copiar count de typeCount en types
@@ -168,10 +168,12 @@ export default function Filter() {
     }
 
     function countRecipes(arr) { //  arr <-- recipes array
+        console.log('💢Filter >> countRecipes(arr) >> ')
         let res = [];
         arr.forEach(r => {
             //r.diets && typeCount.push(r.diets[0]);
-            r.diets.forEach((d) => {
+            console.log('💤 r: ', r)
+            r.diets && r.diets.forEach((d) => {
                 const newDiet = addDietType(res, 'type', d);
                 newDiet && res.push(newDiet)
             }) // add name
@@ -179,40 +181,35 @@ export default function Filter() {
         return res; // ---> typeCount[{type, count}]
     }
 
-    function comments() {
+    /*function comments() {
 
-        /*
-                recipes.forEach(r => {
-                    r.diets.forEach((d) => { countDietTypes(types, d) });
-                });
-                console.log('types:  ', types)
+        
+                // recipes.forEach(r => {
+                //     r.diets.forEach((d) => { countDietTypes(types, d) });
+                // });
+                // console.log('types:  ', types)
             
-                function countDietTypes(arr, diet) {
-                    let found = arr.find(obj => obj.type === diet);
-                    if (found.hasOwnProperty('count')) {
-                        found.count++;
-                    }
-                    else {
-                        found.count = 0;
-                    }
-                }
-                */
+                // function countDietTypes(arr, diet) {
+                //     let found = arr.find(obj => obj.type === diet);
+                //     if (found.hasOwnProperty('count')) {
+                //         found.count++;
+                //     }
+                //     else {
+                //         found.count = 0;
+                //     }
+                // }
+                
 
 
         //console.log('typeCount: ', typeCount)
         //console.log('types: ', types)
-        /*
-            var result = jsObjects.find(obj => {
-              return obj.b === 6
-            })
-        */
+        
+            // var result = jsObjects.find(obj => {
+            //   return obj.b === 6
+            // })
+        
 
-    }
-
-
-
-
-
+    }*/
 
 
 }

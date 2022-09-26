@@ -17,7 +17,8 @@ export default function RecipeCard(props) {
         console.log('ERROR: allTypes.find > TypeError: types.find is not a function')
     } */
     //allTypes.filter(global => global.type ===)
-
+    console.log('--- props.name:  ', props.name)
+    console.log('myDietTypes: ', myDietTypes)
     return (
         <div className={style.card}>
             <Link to={`/detail/${props.id}`}
@@ -29,13 +30,16 @@ export default function RecipeCard(props) {
                     </div>
                 </div>
                 <div className={style.dietTypes}>
-                    {myDietTypes.map((t, i) =>
-
-                        <div className={/* filtering(t.type) */
-                            t.filter ? style.active : style.diet}
-                            key={`dt${i}`}>
-                            {t.name}
-                        </div>
+                    {myDietTypes.map((t, i) => {
+                        //console.log('t: ', JSON.stringify(t))
+                        return t && (
+                            <div className={/* filtering(t.type) */
+                                t.filter ? style.active : style.diet}
+                                key={`dt${i}`}>
+                                {t.name}
+                            </div>
+                        )
+                    }
 
 
                     )}

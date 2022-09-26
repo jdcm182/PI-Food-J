@@ -30,7 +30,7 @@ export function getAllRecipes() {
     return async function (dispatch) {
         try {
             let resp = await axios.get(`http://localhost:3001/recipes`)
-            console.log('ACTIONS > getAllRecipes() > resp: ', resp)
+            //console.log('ACTIONS > getAllRecipes() > resp: ', resp)
             dispatch({ type: 'GET_ALL_RECIPES', payload: resp.data })
         } catch (e) {
             console.log(e)
@@ -61,12 +61,12 @@ export const getRecipes3 = () => async (dispatch) => {
 // Repaso M2 PT06 Diego
 export function getRecipesPT06() {
     return (dispatch) => {
-        console.log('💛 por hacer el axios.get.. ')
+        console.log('por hacer el axios.get.. ')
         axios.get("http://localhost:3001/recipes")
             .then((response) => {
-                console.log('💛response.data: ', response.data)
+                console.log('response.data: ', response.data)
                 const results = response.data;
-                console.log('💛dispatch: ', dispatch)
+                console.log('dispatch: ', dispatch)
                 dispatch({ type: 'GET_ALL_RECIPES', payload: results });
                 // index.js:69 Uncaught (in promise) TypeError: dispatch is not a function at index.js:69:1
             });
@@ -120,9 +120,21 @@ export function restoreRecipes() {
 
 
 export function getDetail(id) {
+    console.log('ACTIONS > getDetail > http://localhost:3001/detail/id')
     return function (dispatch) {
         return fetch(`http://localhost:3001/detail/${id}`)
             .then(response => response.json())
             .then(detail => dispatch({ type: 'SET_DETAIL', payload: detail }))
     }
 }
+
+
+export const createRecipe = obj =>
+    function (dispatch) {
+        axios.post('http://localhost:3001/recipe', obj)
+            .then(r => r.data)
+            .then(recipe => {
+                dispatch({ type: 'CREATE_RECIPE', payload: recipe })
+            })
+            .catch(e => console.log(e));
+    }

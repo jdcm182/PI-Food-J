@@ -14,7 +14,7 @@ export /* default */ function Detail({ match, detailGlobal, getDetailGlobal }) {
         console.log('typeof detailGlobal.id: ', typeof (detailGlobal.id)) // --> number
         console.log('typeof id: ', typeof (id))                          // --> string
         if (!detailGlobal || detailGlobal.id !== parseInt(id)) getDetailGlobal(id);
-    }, [detailGlobal/* , id, getDetailGlobal *//* id, props.detailGlobal */])
+    }, [detailGlobal, id, getDetailGlobal /* id, props.detailGlobal */])
 
     /* var summary = detailGlobal.summary;
     var summaryHtmlObject = document.createElement('div');
@@ -67,14 +67,14 @@ export /* default */ function Detail({ match, detailGlobal, getDetailGlobal }) {
                                         {step.number}
                                     </span>
                                     - {step.step} <br />
-                                    ingredients: {step.ingredients && step.ingredients.map(ingr =>
-                                        <div>
+                                    ingredients: {step.ingredients && step.ingredients.map((ingr, i) =>
+                                        <div key={"ingr" + i}>
                                             {ingr.name}
                                             <img className={style.ingredientImg} src={`https://spoonacular.com/cdn/ingredients_100x100/${ingr.image}/`} alt={"Image of ingredient " + ingr.name} />
                                         </div>
                                     )}
-                                    equipment: {step.equipment && step.equipment.map(equip =>
-                                        <div>
+                                    equipment: {step.equipment && step.equipment.map((equip, i) =>
+                                        <div key={"equi" + i}>
                                             {equip.name}
                                             <img className={style.equipmentImg} src={`https://spoonacular.com/cdn/equipment_100x100/${equip.image}/`} alt={"Image of " + equip.name} />
                                         </div>

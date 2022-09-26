@@ -20,5 +20,8 @@ router.use('/test', testRouter)
 const detailRouter = require('./detailRouter.js')
 router.use('/detail', detailRouter)
 
+const recipeRouter = require('./recipeRouter.js')
+router.use('/recipe', recipeRouter)
+
 
 module.exports = router;

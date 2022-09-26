@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    plateSummary: {
+    summary: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -22,6 +22,9 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
     },
     stepByStep: {
+      type: DataTypes.STRING,
+    },
+    image: {
       type: DataTypes.STRING,
     }
   });

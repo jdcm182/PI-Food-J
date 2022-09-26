@@ -1,0 +1,57 @@
+.createContainer {
+    /* border: 1px solid white; */
+    color: gray;
+}
+
+.inputContainer {
+    display: flex;
+    position: relative;
+    /* border: 1px solid red; */
+    justify-content: center;
+    /* align-items: center; */
+    /* text-align: center; */
+    /* margin: auto; */
+}
+
+.inputItem {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* width: fit-content; */
+    /* border: 1px solid blue; */
+}
+
+.inputItem>input,
+.inputItem>select {
+    background-color: #222;
+    border: 1px solid #333;
+    color: #777;
+    width: 60%;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* text-align: center; */
+    margin: auto;
+    /* border-style: solid; */
+}
+
+.inputItem>label {
+    font-size: .9rem;
+}
+
+
+.createBtn {
+    background-color: #a16237;
+    padding: 1rem 3rem;
+    margin: 1rem;
+    border-radius: 1.2rem 0;
+
+    transition-duration: 300ms;
+    transition-property: background-color;
+}
+
+.createBtn:hover {
+    background-color: #e7954e;
+    /* background-color: #f69a45; */
+    cursor: pointer;
+    /* rgb(250, 42, 42); */
+}

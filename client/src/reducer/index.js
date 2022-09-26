@@ -6,7 +6,7 @@
 ██║  ██║███████╗██████╔╝╚██████╔╝╚██████╗███████╗██║  ██║
 ╚═╝  ╚═╝╚══════╝╚═════╝  ╚═════╝  ╚═════╝╚══════╝╚═╝  ╚═╝
                                                          */
-const dietTypes1 = [
+/* const dietTypes1 = [
     'vegetarian',
     'vegan',
     'glutenFree',
@@ -16,9 +16,9 @@ const dietTypes1 = [
     'veryPopular',
     'sustainable',
     'lowFodmap'
-]
+] */
 
-const dietTypes2 = [
+/* const dietTypes2 = [
     { name: 'Gluten Free', description: 'Eliminating gluten means avoiding wheat, barley, rye, and other gluten-containing grains and foods made from them (or that may have been cross contaminated).' },
     { name: 'Ketogenic', description: 'The keto diet is based more on the ratio of fat, protein, and carbs in the diet rather than specific ingredients. Generally speaking, high fat, protein-rich foods are acceptable and high carbohydrate foods are not. The formula we use is 55-80% fat content, 15-35% protein content, and under 10% of carbohydrates.' },
     { name: 'Vegetarian', description: 'No ingredients may contain meat or meat by-products, such as bones or gelatin.' },
@@ -30,7 +30,7 @@ const dietTypes2 = [
     { name: 'Primal', description: 'Very similar to Paleo, except dairy is allowed - think raw and full fat milk, butter, ghee, etc.' },
     { name: 'Low FODMAP', description: 'FODMAP stands for "fermentable oligo-, di-, mono-saccharides and polyols". Our ontology knows which foods are considered high in these types of carbohydrates (e.g. legumes, wheat, and dairy products)' },
     { name: 'Whole 30', description: 'Allowed ingredients include meat, fish/seafood, eggs, vegetables, fresh fruit, coconut oil, olive oil, small amounts of dried fruit and nuts/seeds. Ingredients not allowed include added sweeteners (natural and artificial, except small amounts of fruit juice), dairy (except clarified butter or ghee), alcohol, grains, legumes (except green beans, sugar snap peas, and snow peas), and food additives, such as carrageenan, MSG, and sulfites.' }
-]
+] */
 
 const dietTypes = [
     { type: "gluten free", name: 'Gluten Free', filter: false, description: 'Eliminating gluten means avoiding wheat, barley, rye, and other gluten-containing grains and foods made from them (or that may have been cross contaminated).' },
@@ -44,8 +44,6 @@ const dietTypes = [
     { type: "ketogenic", name: 'Ketogenic', filter: false, description: 'The keto diet is based more on the ratio of fat, protein, and carbs in the diet rather than specific ingredients. Generally speaking, high fat, protein-rich foods are acceptable and high carbohydrate foods are not. The formula we use is 55-80% fat content, 15-35% protein content, and under 10% of carbohydrates.' },
     { type: "fodmap friendly", name: 'Low FODMAP', filter: false, description: 'FODMAP stands for "fermentable oligo-, di-, mono-saccharides and polyols". Our ontology knows which foods are considered high in these types of carbohydrates (e.g. legumes, wheat, and dairy products)' }
 ]
-
-
 // https://spoonacular.com/food-api/docs#Diets
 
 
@@ -118,6 +116,12 @@ export default function rootReducer(state = initialState, action) {
         case 'SET_DETAIL': return {
             ...state,
             detail: action.payload
+        }
+        case 'CREATE_RECIPE': return {
+            ...state,
+            recipes: [action.payload, ...state.recipes],
+            allRecipes: [action.payload, ...state.allRecipes]
+            // setear pagina en 1 ..
         }
         default: return { ...state };
     };
