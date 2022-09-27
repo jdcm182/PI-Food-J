@@ -13,7 +13,15 @@ export /* default */ function Detail({ match, detailGlobal, getDetailGlobal }) {
         console.log('detailGlobal: ', detailGlobal)
         console.log('typeof detailGlobal.id: ', typeof (detailGlobal.id)) // --> number
         console.log('typeof id: ', typeof (id))                          // --> string
-        if (!detailGlobal || detailGlobal.id !== parseInt(id)) getDetailGlobal(id);
+
+
+        //if (!detailGlobal || detailGlobal.id !== parseInt(id)) getDetailGlobal(id);
+        if (!detailGlobal) getDetailGlobal(id)
+        else if (detailGlobal.id && detailGlobal.id[0] === 'B') { // id from local DB
+            detailGlobal.id !== id && getDetailGlobal(id);
+        } else { // id from API
+            detailGlobal.id !== parseInt(id) && getDetailGlobal(id);
+        }
     }, [detailGlobal, id, getDetailGlobal /* id, props.detailGlobal */])
 
     /* var summary = detailGlobal.summary;
@@ -24,20 +32,35 @@ export /* default */ function Detail({ match, detailGlobal, getDetailGlobal }) {
 
     return (
         <div className={style.detail}>
-            <NavBar setPage={1/* actPage */} />
+            <NavBar /*setPage={actPage }*/ />
             DETAIL
-            <br />
+            < br />
             {/* JSON.stringify(props) */}
-            <br />
+            < br />
             id: {/* props.detailGlobal. */id} <br />
             name: {detailGlobal.name} <br />
+
+
+
             <div className={style.dietContainer}>
-                dietTypes: {detailGlobal && detailGlobal.dietTypes && detailGlobal.dietTypes.map((diet, i) => (
+                {detailGlobal && detailGlobal.dietTypes && "dietTypes:"}
+                {detailGlobal && detailGlobal.dietTypes && detailGlobal.dietTypes.map((diet, i) => (
                     <div className={style.dietType}
                         key={"et" + i}>
                         {diet}
-                    </div>))} <br />
+                    </div>))}
+
+                {detailGlobal && detailGlobal.diets && "diets:"}
+                {detailGlobal && detailGlobal.diets && detailGlobal.diets.map((diet, i) => (
+                    <div className={style.dietType}
+                        key={"et" + i}>
+                        {diet}
+                    </div>))}
+
+                <br />
             </div>
+
+
             <div className={style.dishContainer}>
                 dishTypes: {detailGlobal && detailGlobal.dishTypes && detailGlobal.dishTypes.map((dish, i) => (
                     <div className={style.dishType}
@@ -51,12 +74,22 @@ export /* default */ function Detail({ match, detailGlobal, getDetailGlobal }) {
 
             img: {detailGlobal.image} <br />
             <br />
-            summary: {/* summaryHtmlObject */detailGlobal.summary} <br />
+            summary: <p dangerouslySetInnerHTML={{ __html: detailGlobal.summary, }} /> <br />
             healthScore: {detailGlobal.healthScore} <br />
-            instructions: {detailGlobal.instructions} <br />
+            instructions: <p dangerouslySetInnerHTML={{ __html: detailGlobal.instructions }} /> <br />
             <br />
+
+
             <div className={style.stepByStepContainer}>
-                stepByStep: {detailGlobal && detailGlobal.stepByStep && detailGlobal.stepByStep.map((obj, i) => (
+                "stepByStep:"
+                {detailGlobal && detailGlobal.stepByStep && !Array.isArray(detailGlobal.stepByStep) && (
+
+                    <div className={style.obj} >
+                        {detailGlobal.stepByStep}
+                    </div>
+                )}
+
+                {/* stepByStep: */} {detailGlobal && detailGlobal.stepByStep && Array.isArray(detailGlobal.stepByStep) && detailGlobal.stepByStep.map((obj, i) => (
                     <div className={style.obj} key={"objst" + i}>
                         name: {obj.name}      <br />
                         steps:
@@ -91,19 +124,19 @@ export /* default */ function Detail({ match, detailGlobal, getDetailGlobal }) {
     )
 
     /*
-        detailGlobal: 
+        detailGlobal:
             const obj = {
                 id: recipe.id,
-                image: recipe.image,
-                name: recipe.title,
-                dietTypes: recipe.diets,    //  array
-                dishTypes: recipe.dishTypes, // array
-                summary: recipe.summary,
-                healthScore: recipe.healthScore,
-                instructions: recipe.instructions,
-                stepByStep: recipe.analyzedInstructions // array {name, steps[]}
+            image: recipe.image,
+            name: recipe.title,
+            dietTypes: recipe.diets,    //  array
+            dishTypes: recipe.dishTypes, // array
+            summary: recipe.summary,
+            healthScore: recipe.healthScore,
+            instructions: recipe.instructions,
+            stepByStep: recipe.analyzedInstructions // array {name, steps[]}
     }
-    */
+            */
 
 }
 

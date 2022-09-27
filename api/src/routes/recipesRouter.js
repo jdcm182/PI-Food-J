@@ -142,9 +142,18 @@ router.get('/', async (req, res) => {
                 name: {
                     [Op.iLike]: '%' + search + '%'
                 }
-            }
+            }, include: { model: Diet }
         })
         console.log(`found ${foundRecipesFromDB.length} in local Database`)
+
+        let cleanRecipesFromDB = [];
+        foundRecipesFromDB.forEach(r => {
+            const aux = extractMainKeys(r);
+            cleanRecipesFromDB.push(aux);
+        });
+        //console.log('cleanRecipesFromDB: ', JSON.stringify(cleanRecipesFromDB))
+
+        //---------------------------------------------------------
 
         // Search in API (w/cache)
         const fileName = `search_${searchStr}`
@@ -210,7 +219,8 @@ router.get('/', async (req, res) => {
         }
 
         // join results from local DB & from external API into one
-        let foundRecipes = foundRecipesFromDB.concat(foundRecipesFromAPI/* .data */.results.map(r => extractMainKeys(r)));
+        //let foundRecipes = foundRecipesFromDB.concat(foundRecipesFromAPI/* .data */.results.map(r => extractMainKeys(r)));
+        let foundRecipes = cleanRecipesFromDB.concat(foundRecipesFromAPI/* .data */.results.map(r => extractMainKeys(r)));
         console.log('\n >> (search) foundRecipes.length: ', foundRecipes.length)
         // limit amount of results
         if (foundRecipes.length > 0) {
@@ -241,7 +251,7 @@ router.get('/cache', async (req, res) => {
     fs.readdir(folder, (err, files) => {
         let cacheList = [];
         files.forEach(file => {
-            console.log(file)
+            //console.log('cache file found: ', file)
             if (file.startsWith('search_')) {
                 let newName = '';
                 newName = file.replace('search_', '');
@@ -260,19 +270,22 @@ module.exports = router;
 
 function extractMainKeys(recipe) {
     let dietTypes = [];
+    let nameOrTitle = '';
 
     if (recipe.id && recipe.id[0] === 'B') {
+        nameOrTitle = 'name';
         if (recipe.diets) {
             recipe.diets.forEach(d => dietTypes.push(d.type));
         }
     } else {
         dietTypes = recipe.diets;
+        nameOrTitle = 'title';
     }
 
     const obj = {
         id: recipe.id,
         image: recipe.image,
-        name: recipe.title,
+        name: recipe[nameOrTitle],//.name,//.title,
         // dietType: ??? 
         diets: dietTypes, // recipe.diets,
         dishTypes: recipe.dishTypes,

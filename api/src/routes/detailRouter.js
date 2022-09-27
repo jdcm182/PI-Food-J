@@ -8,6 +8,31 @@ require('dotenv').config();
 const API_KEY = process.env.YOUR_API_KEY;
 
 
+function extractDetailFromDB(recipe) {
+    let dietTypes = [];
+
+    if (recipe.id && recipe.id[0] === 'B') {
+        if (recipe.diets) {
+            recipe.diets.forEach(d => dietTypes.push(d.type));
+        }
+    } else {
+        dietTypes = recipe.diets;
+    }
+
+    const obj = {
+        id: recipe.id,
+        image: recipe.image,
+        name: recipe.name,  // API: title,  DB: name
+        // dietType: ??? 
+        diets: dietTypes, // recipe.diets,
+        dishTypes: recipe.dishTypes,
+        summary: recipe.summary,
+        healthScore: recipe.healthScore,
+        stepByStep: recipe.stepByStep
+    }
+    return obj;
+}
+
 
 const extractDetailsFromAPI = (recipe) => {
     console.log('>> detailRouter.js > extractDetailsFromAPI: ')
@@ -49,6 +74,20 @@ router.get('/:id', async (req, res) => {
             //
             //
             //
+
+            const r = await Recipe.findByPk(id, { include: { all: true } });
+
+            if (r) {
+                const newRec = extractDetailFromDB(r);
+                console.log(`Receta ${id} encontrada en la BD`)
+                console.log('newRec: ', JSON.stringify(newRec))
+                return res.status(200).json(newRec);
+            } else {
+                console.log(`No se encontro el id ${id} en la BD`);
+                return res.status(400).send('Error: No se encontro el id en la base de datos');
+            }
+
+
         } else {
             // GET /detail/11 --> API
 
