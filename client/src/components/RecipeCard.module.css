@@ -10,7 +10,8 @@
     width: 100%;
     /* min-width: 8rem; */
     /* max-width: 15rem; */
-    min-height: 15rem;
+    /* min-height: 15rem; */
+    height: 15rem;
     border-radius: .2rem;
 
     border-radius: 0 0 .5rem .5rem;
@@ -36,9 +37,9 @@
 }
 
 .infoContainer {
-    height: 80%;
+    /* height: 80%; */
     width: 100%;
-    background-color: red;
+    /* background-color: red; */
 }
 
 .dietTypes {
