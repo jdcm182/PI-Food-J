@@ -1,26 +1,43 @@
 import React from 'react';
 import style from './GlobalNotifications.module.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { dismissMessages } from '../actions';
 
 export default function GlobalNotifications() {
 
+    const errorMsg = useSelector((state) => state.errorMsg);
+    const infoMsg = useSelector((state) => state.infoMsg);
+
+    const dispatch = useDispatch();
+
+
+    const closeInfo = () => {
+        //console.log('closeInfo')
+        console.log('closeInfo..')
+        dispatch(dismissMessages())
+        // errorMsg = '';
+        // infoMsg = '';
+    }
+
     return (
         <div>
-            <div className={style.glass}>
+            {errorMsg && <div className={style.glass}>
                 <div className={style.wrapper}>
                     <div className={style.centerBox}>
-                        <div className={style.closeBtn}>X</div>
+                        <div className={style.closeBtn} onClick={closeInfo}>X</div>
                         <div className={style.msgBody}>
                             GLOBAL NOTIFICATIONS COMPONENT
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className={style.transparent}>
+            </div>}
+            {infoMsg && <div className={style.transparent}>
                 <div className={style.bottomBox}>
-                    <div className={style.closeBtn}>X</div>
+                    <div className={style.closeBtn} onClick={() => closeInfo()}>X</div>
                     <div className={style.msgBody}>Bottom</div>
                 </div>
-            </div>
+            </div>}
         </div>
     )
+
 }

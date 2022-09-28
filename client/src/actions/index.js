@@ -144,3 +144,9 @@ export const createRecipe = obj =>
             })
             .catch(e => console.log(e));
     }
+
+
+export const dismissMessages = () => {
+    console.log('actions > dismissMessages()')
+    return { type: 'DISMISS_MSG' }
+}
