@@ -26,7 +26,9 @@ export default function GlobalNotifications() {
                     <div className={style.centerBox}>
                         <div className={style.closeBtn} onClick={closeInfo}>X</div>
                         <div className={style.msgBody}>
-                            GLOBAL NOTIFICATIONS COMPONENT
+                            {/* GLOBAL NOTIFICATIONS COMPONENT */}
+                            {/* errorMsg */}
+                            {<span dangerouslySetInnerHTML={{ __html: errorMsg }} />}
                         </div>
                     </div>
                 </div>
@@ -34,7 +36,10 @@ export default function GlobalNotifications() {
             {infoMsg && <div className={style.transparent}>
                 <div className={style.bottomBox}>
                     <div className={style.closeBtn} onClick={() => closeInfo()}>X</div>
-                    <div className={style.msgBody}>Bottom</div>
+                    <div className={style.msgBody}>
+                        {/* Bottom */}
+                        {infoMsg}
+                    </div>
                 </div>
             </div>}
         </div>
