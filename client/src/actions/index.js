@@ -108,6 +108,12 @@ export function setFilters(recipes) {
     }
 }
 
+export function setRecipes(recipes) {
+    return function (dispatch) {
+        dispatch({ type: 'SET_RECIPES', payload: recipes });
+    }
+}
+
 export function clearFilters() {
     return function (dispatch) {
         dispatch({ type: 'CLEAR_FILTERS', payload: '' })

@@ -29,6 +29,7 @@ export default function RecipeCard(props) {
                         {props.name}
                     </div>
                 </div>
+                <div className={style.healthScore}>{props.healthScore}</div>
                 <div className={style.dietTypes}>
                     {myDietTypes.map((t, i) => {
                         //console.log('t: ', JSON.stringify(t))

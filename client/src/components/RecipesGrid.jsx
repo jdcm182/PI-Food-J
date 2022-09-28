@@ -11,6 +11,8 @@ export default function RecipesGrid(props) {
         //console.log('RecipesGrid.jsx --- useEffect ---')
     })
 
+    console.log('💦props: ', props)
+
     return (
         <div className={style.cardsContainer}>
             {!props.recipes && <div>RECIPES GRID</div>}
@@ -24,6 +26,7 @@ export default function RecipesGrid(props) {
                         /* dietType? */
                         diets={r.diets}
                         dishTypes={r.dishTypes}
+                        healthScore={r.healthScore}
                     />
                 </div>)}
 
