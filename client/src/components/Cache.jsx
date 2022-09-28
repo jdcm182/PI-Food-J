@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import style from './Cache.module.css';
 import { /* useSelector, */ connect/* , useDispatch */ } from 'react-redux';
 //import { NavLink } from 'react-router-dom';
-import { doSearch, setSearchStr, setFilters, clearFilters } from '../actions'
+import { doSearch, setSearchStr, setFilters, clearFilters, displayError } from '../actions'
 
 import axios from 'axios';
 
-export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr, clearAllFilters/* setFilters */ }) {
+export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr, clearAllFilters/* setFilters */, displayError }) {
 
 
     const [files, setFiles] = useState([]);
@@ -39,12 +39,17 @@ export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr
             {files && files.map((f, i) => (
                 <div key={'files' + i} className={searchStr === f ? style.activeFile : style.file}
                     onClick={() => {
-                        clearAllFilters();
+                        try {
+                            clearAllFilters();
                         //dispatch(search(f));
                         //dispatch(setSearchStr(f));
                         /* props. */search(f);
                         /* props. */setSearchStr(f);
-                        //setFilters([]);
+                            //setFilters([]);
+                        } catch (e) {
+                            console.log('ERROR - Cache.jsx > e: ', e)
+                            displayError(e.message)
+                        }
 
                     }}>
                     {f ? f : 'ALL'} < br />
@@ -76,7 +81,7 @@ export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr
     async function handleClick() {
         try {
             let resp = await axios.get(`http://localhost:3001/recipes/cache`);
-            console.log('💫handleClick > resp: ', resp)
+            //console.log('💫handleClick > resp: ', resp)
             setFiles(resp.data);
             //setSearchStr(resp.data);
             //setpage <-- 1
@@ -92,7 +97,8 @@ function mapDispatchToProps(dispatch) {
         search: (str) => dispatch(doSearch(str)),
         setSearchStr: (str) => dispatch(setSearchStr(str)),
         setFilters: (arr) => dispatch(setFilters(arr)),
-        clearAllFilters: () => dispatch(clearFilters())
+        clearAllFilters: () => dispatch(clearFilters()),
+        displayError: (str) => dispatch(displayError(str))
     }
 }
 

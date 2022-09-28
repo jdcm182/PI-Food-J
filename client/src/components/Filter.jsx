@@ -2,7 +2,7 @@ import React from 'react';
 import style from './Filter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 //import { NavLink } from 'react-router-dom';
-import { setFilters/* , restoreRecipes */ } from '../actions';
+import { setFilters/* , restoreRecipes */, displayInfo/* displayError */ } from '../actions';
 
 
 export default function Filter() {
@@ -54,6 +54,8 @@ export default function Filter() {
             }); */
         } catch (e) {
             toggleFilter(types, t.type);
+            //dispatch(displayError(e.message));
+            dispatch(displayInfo(e.message));
             console.log(e);
         }
     }
@@ -168,11 +170,11 @@ export default function Filter() {
     }
 
     function countRecipes(arr) { //  arr <-- recipes array
-        console.log('💢Filter >> countRecipes(arr) >> ')
+        //console.log('💢Filter >> countRecipes(arr) >> ')
         let res = [];
         arr.forEach(r => {
             //r.diets && typeCount.push(r.diets[0]);
-            console.log('💤 r: ', r)
+            //console.log('💤 r: ', r)
             r.diets && r.diets.forEach((d) => {
                 const newDiet = addDietType(res, 'type', d);
                 newDiet && res.push(newDiet)
