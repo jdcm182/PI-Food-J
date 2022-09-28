@@ -6,6 +6,7 @@ import Landing from './components/Landing.jsx'
 import MainDataHandler from './components/MainDataHandler.jsx'
 import Detail from './components/Detail';
 import CreateRecipe from './components/CreateRecipe';
+import GlobalNotifications from './components/GlobalNotifications';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
     <div className="App">
       {/* <h1>Henry Food</h1> */}
       <Route exact path={'/'} component={Landing} />
+      <Route path={'/'} component={GlobalNotifications} />
       {/* <Route path={'/recipes'} component={NavBar} /> */}
       <Route path={'/recipes/main'} component={MainDataHandler} />
       <Route path={'/recipes/create'} component={CreateRecipe} />
