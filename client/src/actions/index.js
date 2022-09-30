@@ -137,6 +137,12 @@ export function clearFilters() {
     }
 }
 
+export function clearOrder() {
+    return function (dispatch) {
+        dispatch({ type: 'CLEAR_ORDER', payload: '' })
+    }
+}
+
 export function restoreRecipes() {
     return { type: 'RESTORE_RECIPES', payload: '' }
 }
@@ -167,4 +173,13 @@ export const createRecipe = obj =>
 export const dismissMessages = () => {
     //console.log('actions > dismissMessages()')
     return { type: 'DISMISS_MSG' }
+}
+
+export const setOrder = (param, order) => {
+    let ord = '';
+    if (param === 'name' && order === 'ASC') ord = 'A-Z';
+    else if (param === 'name' && order === 'DESC') ord = 'Z-A';
+    else if (param === 'healthScore' && order === 'ASC') ord = '1-9';
+    else if (param === 'healthScore' && order === 'DESC') ord = '9-1';
+    return { type: 'SET_ORDER', payload: ord }
 }

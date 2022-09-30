@@ -1,13 +1,14 @@
 import React from 'react';
 import style from './Order.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { setRecipes } from '../actions';
+import { setRecipes, setOrder } from '../actions';
 
 export default function Order() {
     //console.log('----------------- function Order() -----------------')
 
 
     const recipes = useSelector((state) => state.recipes);
+    const ord = useSelector((state) => state.order);
     const dispatch = useDispatch();
 
 
@@ -35,6 +36,7 @@ export default function Order() {
     const order = (/* recipes, */ param, order) => {
         let sortedRecipes = bubbleSort(recipes, param, order);
         dispatch(setRecipes(sortedRecipes));
+        dispatch(setOrder(param, order));
     }
 
     return (
@@ -43,13 +45,17 @@ export default function Order() {
             <br />
             <div>
                 Recipe Name <br />
-                <button onClick={/* orderAZ */ () => order('name', 'ASC')}>A-Z</button>
-                <button onClick={/* orderZA */ () => order('name', 'DESC')}>Z-A</button>
+                <button className={ord === 'A-Z' ? style.btnActive : style.btnNormal}
+                    onClick={/* orderAZ */ () => order('name', 'ASC')}>A-Z</button>
+                <button className={ord === 'Z-A' ? style.btnActive : style.btnNormal}
+                    onClick={/* orderZA */ () => order('name', 'DESC')}>Z-A</button>
             </div>
             <div>
                 Recipe Health Score<br />
-                <button onClick={/* order19 */() => order('healthScore', 'ASC')}>1-9</button>
-                <button onClick={/* order91 */() => order('healthScore', 'DESC')}>9-1</button>
+                <button className={ord === '1-9' ? style.btnActive : style.btnNormal}
+                    onClick={/* order19 */() => order('healthScore', 'ASC')}>1-9</button>
+                <button className={ord === '9-1' ? style.btnActive : style.btnNormal}
+                    onClick={/* order91 */() => order('healthScore', 'DESC')}>9-1</button>
             </div>
         </div>
 

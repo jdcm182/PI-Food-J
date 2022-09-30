@@ -55,7 +55,11 @@ const initialState = {
     dietTypes,
     searchStr: '',
     //cache: [],
-    detail: {}
+    detail: {},
+    order: '', //A-Z, Z-A, 1-9, 9-1
+    errorMsg: '',
+    infoMsg: '',
+    //error: { msg: '', detail: '' }
 }
 
 
@@ -96,23 +100,23 @@ export default function rootReducer(state = initialState, action) {
         }
         case 'CLEAR_FILTERS':
             const diets = [...state.dietTypes]; // {...} nooo! es array!
-            console.log('REDUCER > CLEAR_FILTERS > ')
-            console.log('diets: ', diets)
+            // console.log('REDUCER > CLEAR_FILTERS > ')
+            // console.log('diets: ', diets)
             for (const diet of diets) { // diets is not iterable
                 diet.filter = false;
             }
             /* for (let i = 0; i < diets.length; i++)
                 diets[i].filter = false; */
-            console.log('diets: ', diets)
+            // console.log('diets: ', diets)
             return {
                 ...state,
                 dietTypes: diets,
                 filteredRecipes: state.recipes
             }
         case 'RESTORE_RECIPES': console.log('REDUCER > RESTORE_RECIPES')
-            console.log('REDUCER > RESTORE_RECIPES > ')
-            console.log('state.allRecipes', state.allRecipes)
-            console.log('state.recipes', state.recipes)
+            // console.log('REDUCER > RESTORE_RECIPES > ')
+            // console.log('state.allRecipes', state.allRecipes)
+            // console.log('state.recipes', state.recipes)
             return {
                 ...state,
                 recipes: [...state.allRecipes]
@@ -126,6 +130,30 @@ export default function rootReducer(state = initialState, action) {
             recipes: [action.payload, ...state.recipes],
             allRecipes: [action.payload, ...state.allRecipes]
             // setear pagina en 1 ..
+        }
+        case 'DISMISS_MSG': {
+            // console.log('Reducer > DISMISS_MSG')
+            return {
+                ...state,
+                errorMsg: '',
+                infoMsg: '',
+            }
+        }
+        case 'SHOW_ERROR': return {
+            ...state,
+            errorMsg: action.payload
+        }
+        case 'SHOW_INFO': return {
+            ...state,
+            infoMsg: action.payload
+        }
+        case 'SET_ORDER': return {
+            ...state,
+            order: action.payload
+        }
+        case 'CLEAR_ORDER': return {
+            ...state,
+            order: ''
         }
         default: return { ...state };
     };

@@ -3,7 +3,7 @@ import style from './MainDataHandler.module.css';
 //import Test from './Test.jsx'
 import RecipesGrid from './RecipesGrid.jsx'
 import NavBar from './NavBar.jsx'
-import Order from './Order.jsx'
+// import Order from './Order.jsx'
 import { connect, useDispatch } from 'react-redux';
 import { Pagination } from './Pagination.jsx';
 //import axios from 'axios';
@@ -85,16 +85,18 @@ export /* default */ function Main({ recipes, filteredRecipes, cache }) {
             <div className={style.main}>
                 <div className={style.column}>
                     <Filter />
-                    <Order />
+                    {/* <Order /> */}
                 </div>
 
                 <div className={style.central}>
                     {!recipes && "MAIN DATA HANDLER"}
 
-                    {recipes && <Pagination recipes={recipes} itemsPerPage={ITEMS_PER_PAGE}
+                    {recipes && <Pagination recipes={recipes}
+                        itemsPerPage={ITEMS_PER_PAGE}
                         page={page} setPage={actPage} />}
                     {subset && <RecipesGrid recipes={subset} />}
-                    {recipes && <Pagination recipes={recipes} itemsPerPage={ITEMS_PER_PAGE}
+                    {recipes && <Pagination recipes={recipes}
+                        itemsPerPage={ITEMS_PER_PAGE}
                         page={page} setPage={actPage} />}
 
                 </div>

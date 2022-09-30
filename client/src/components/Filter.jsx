@@ -2,7 +2,7 @@ import React from 'react';
 import style from './Filter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 //import { NavLink } from 'react-router-dom';
-import { setFilters/* , restoreRecipes */, displayInfo/* displayError */ } from '../actions';
+import { setFilters/* , restoreRecipes */, displayInfo/* displayError */, setRecipes, setOrder } from '../actions';
 
 
 export default function Filter() {
@@ -21,6 +21,38 @@ export default function Filter() {
     // [{type, count}, {type, count}, {type, count}, {type, count}, {type, count}]
     let typeCount /* = []; typeCount */ = countRecipes(recipes);
     //console.log('typeCount: ', typeCount)
+
+    const order = useSelector((state) => state.order);
+
+    const doOrder = (/* recipes, */ param, o) => {
+        let sortedRecipes = bubbleSort(recipes, param, o);
+        dispatch(setRecipes(sortedRecipes));
+        dispatch(setOrder(param, o));
+    }
+
+    // in: recipes & order
+    const ordenar = (recipesArr) => {
+        console.log('func ordenar()  >>  order:  ', order)
+        let param = '';
+        let o = '';
+        if (order === 'A-Z') {
+            param = 'name';
+            o = 'ASC';
+        } else if (order === 'Z-A') {
+            param = 'name';
+            o = 'DESC';
+        } else if (order === '1-9') {
+            param = 'healthScore';
+            o = 'ASC';
+        } else {
+            param = 'healthScore';
+            o = 'DESC'
+        }
+        console.log('param: ', param)
+        console.log('order "o": ', o)
+        return bubbleSort(recipesArr, param, o);
+    }
+
 
 
     // copiar count de typeCount en types
@@ -44,7 +76,20 @@ export default function Filter() {
             console.log('types', types)
             console.log('dispatch.. setFilters.. filterByTypes.. getActiveFilters')
             //dispatch(setFilters(filterByType(t.type)));
-            dispatch(setFilters(filterByTypes(getActiveFilters())));
+
+            const filteredRecipes = filterByTypes(getActiveFilters())
+            if (order !== '') {
+                let sortedRecipes = ordenar(filteredRecipes);
+                //dispatch(setFilters(sortedRecipes));
+                dispatch(setRecipes(sortedRecipes));
+            } else {
+                dispatch(setFilters(filteredRecipes));
+            }
+
+            console.log('Ordenando desde Filter..')
+            //dispatch(setOrder(param, order));
+            //order(param, o)
+
             // VOLVER A CONTAR CANTIDADES
             /* typeCount = countRecipes(filteredRecipes);
             typeCount.forEach((t) => {
@@ -79,6 +124,25 @@ export default function Filter() {
             <br />
 
             {/* {typeCount.map((t, i) => (<div key={'t' + i}>{t.type + `(${t.count})`}</div>))} */}
+
+            <div className={style.order}>
+                ORDER: {order}
+                <br />
+                <div>
+                    Recipe Name <br />
+                    <button className={order === 'A-Z' ? style.btnActive : style.btnNormal}
+                        onClick={/* orderAZ */ () => doOrder('name', 'ASC')}>A-Z</button>
+                    <button className={order === 'Z-A' ? style.btnActive : style.btnNormal}
+                        onClick={/* orderZA */ () => doOrder('name', 'DESC')}>Z-A</button>
+                </div>
+                <div>
+                    Recipe Health Score<br />
+                    <button className={order === '1-9' ? style.btnActive : style.btnNormal}
+                        onClick={/* order19 */() => doOrder('healthScore', 'ASC')}>1-9</button>
+                    <button className={order === '9-1' ? style.btnActive : style.btnNormal}
+                        onClick={/* order91 */() => doOrder('healthScore', 'DESC')}>9-1</button>
+                </div>
+            </div>
 
         </div >
     )
@@ -133,14 +197,6 @@ export default function Filter() {
         }
 
     }
-
-
-
-
-
-
-
-
 
 
 
@@ -215,3 +271,32 @@ export default function Filter() {
 
 
 }
+
+
+// LOGICA DE COMPONENTE ORDER!!!!
+//    param:   name || healthScore
+//    order:   ASC || DESC
+function bubbleSort(arr, param, order) {
+    let array = [...arr];
+    let cantIterations = 0;
+    let cantCambios = 0;
+    let huboCambios = true;
+    while (huboCambios) {
+        huboCambios = false;
+        for (let i = 0; i < array.length - 1; i++) {
+            cantIterations++;
+            let swapCondition = false;
+            if (order === 'ASC') swapCondition = array[i][param] > array[i + 1][param];
+            else swapCondition = array[i][param] < array[i + 1][param];
+            if (swapCondition) {
+                let aux = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = aux;
+                huboCambios = true;
+                cantCambios++;
+            }
+        }
+    }
+    console.log('bubbleSort >> CantIterations: ' + cantIterations + ' - cantCambios: ' + cantCambios);
+    return array;
+} 

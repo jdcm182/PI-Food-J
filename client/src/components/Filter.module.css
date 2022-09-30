@@ -60,3 +60,15 @@ nav>ul>li>:hover {
     background-color: #0f2a4d;
 }
 */
+
+
+.order {}
+
+.btnNormal {
+    background-color: #777;
+    cursor: pointer;
+}
+
+.btnActive {
+    background-color: aquamarine;
+}

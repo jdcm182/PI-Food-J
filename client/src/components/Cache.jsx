@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import style from './Cache.module.css';
 import { /* useSelector, */ connect/* , useDispatch */ } from 'react-redux';
 //import { NavLink } from 'react-router-dom';
-import { doSearch, setSearchStr, setFilters, clearFilters, displayError } from '../actions'
+import { doSearch, setSearchStr, setFilters, clearFilters, displayError, clearOrder } from '../actions'
 
 import axios from 'axios';
 
-export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr, clearAllFilters/* setFilters */, displayError }) {
+export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr, clearAllFilters/* setFilters */, displayError, clearOrder }) {
 
 
     const [files, setFiles] = useState([]);
@@ -41,6 +41,7 @@ export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr
                     onClick={() => {
                         try {
                             clearAllFilters();
+                            clearOrder();
                         //dispatch(search(f));
                         //dispatch(setSearchStr(f));
                         /* props. */search(f);
@@ -98,7 +99,8 @@ function mapDispatchToProps(dispatch) {
         setSearchStr: (str) => dispatch(setSearchStr(str)),
         setFilters: (arr) => dispatch(setFilters(arr)),
         clearAllFilters: () => dispatch(clearFilters()),
-        displayError: (str) => dispatch(displayError(str))
+        displayError: (str) => dispatch(displayError(str)),
+        clearOrder: () => dispatch(clearOrder())
     }
 }
 
