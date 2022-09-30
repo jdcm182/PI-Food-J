@@ -1,35 +1,48 @@
+.normal,
+.btnT {
+  cursor: pointer;
+}
+
 .btnT {
   /* background-color: #777; */
-  background-color: #535353;
-  color: #777;
+  /* background-color: #535353; */
+  background-color: var(--btnColor);
+  /* color: #777; */
+  color: var(--btnFontColor)
 }
 
 .btnT:hover {
-  background-color: #0078ff;
+  /* background-color: #0078ff; */
+  background-color: var(--btnHoverColor);
 }
 
 .actual {
   /* background-color: rgb(255, 222, 74); */
-  background-color: rgb(190, 190, 190);
+  /* background-color: rgb(190, 190, 190); */
+  background-color: var(--btnActiveColor);
 }
 
 .normal {
   /* background-color: rgb(218, 75, 75); */
-  background-color: #141526;
-  color: #777;
+  /* background-color: #141526; */
+  background-color: var(--btnColor);
+  /* color: #777; */
+  color: var(--btnFontColor);
 }
 
 .normal:hover {
-  background-color: aliceblue;
-  cursor: pointer;
+  /* background-color: aliceblue; */
+  background-color: var(--btnHoverColor);
 }
 
 button:disabled,
 button[disabled] {
   /* border: 1px solid #999999; */
-  background-color: #222;
+  /* background-color: #222; */
+  background-color: var(--btnDisabledColor);
   border: 2px solid black;
-  color: #666666;
+  /* color: #666666; */
+  color: var(--btnFontColor);
   width: 2rem;
 }
 

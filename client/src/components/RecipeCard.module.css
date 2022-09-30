@@ -32,7 +32,8 @@
 
 .card:hover {
     /* -webkit-box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); */
-    box-shadow: 0 0 8px rgb(14, 118, 255);
+    /* box-shadow: 0 0 8px rgb(14, 118, 255); */
+    box-shadow: 0 3px 10px rgb(110 110 110);
 
 }
 
@@ -65,7 +66,9 @@
 }
 
 .active {
-    background-color: rgba(175, 224, 41, 0.733);
+    /* background-color: rgba(175, 224, 41, 0.733); */
+    background-color: var(--colorAccent);
+
     color: black;
 }
 

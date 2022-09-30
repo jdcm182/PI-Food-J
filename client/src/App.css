@@ -38,12 +38,30 @@
   }
 }
 
+:root {
+  --mainColor: rgba(175, 224, 41, 0.733);
+  --btnTBackground: #535353;
+  --colorAccent2: blueviolet;
+  --colorAccent3: #0078ff;
+  --colorAccent: rgba(175, 224, 41, 0.733);
+
+  --btnFontColor: #777;
+  --btnColor: #141526;
+  --btnHoverColor: aliceblue;
+  --btnActiveColor: rgb(190, 190, 190);
+  --btnDisabledColor: #222;
+}
 
 body {
   /* background-color: #1b263b; */
-  background-image: url('https://wallpapercave.com/wp/wp3416319.jpg');
+  /* background-image: url('https://wallpapercave.com/wp/wp3416319.jpg'); */
+  background-image: url("media/DarkWood.jpg");
   /* background-repeat: no-repeat; */
   /* background-size: cover; */
+  /* client\src\media\DarkWood.jpg */
+  /* client\src\App.css */
+
+
 }
 
 a {

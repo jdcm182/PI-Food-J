@@ -5,22 +5,30 @@
     margin: 0 auto;
 }
 
+.file,
+.activeFile {
+    font-size: .8rem;
+    margin: .3rem .1rem;
+    padding: .2rem;
+    border-radius: .2rem;
+}
+
 .file {
     /* background-color: red; */
-    font-size: .8rem;
-    background-color: #141526;
-    margin: .3rem .1rem;
-    padding: .1rem;
-    border-radius: .2rem;
+    /* background-color: #141526; */
+    background-color: var(--btnColor);
     cursor: pointer;
 }
 
 .activeFile {
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
+    background-color: var(--btnActiveColor);
+    color: black;
 }
 
 .file:hover {
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
+    background-color: var(--btnHoverColor);
 }
 
 @media (max-width: 40em) {

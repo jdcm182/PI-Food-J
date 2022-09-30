@@ -8,7 +8,8 @@
 .fil {
     /* background-color: red; */
     font-size: .8rem;
-    background-color: #141526;
+    /* background-color: #141526; */
+    background-color: var(--btnColor);
     margin: .3rem .1rem;
     padding: .1rem;
     border-radius: .2rem;
@@ -17,8 +18,8 @@
 
 .fil:hover {
     /* background-color: blueviolet; */
-    background-color: rgb(187, 255, 0);
-    ;
+    /* background-color: rgb(187, 255, 0); */
+    background-color: var(--btnHoverColor);
 }
 
 @media (max-width: 40em) {
@@ -33,12 +34,15 @@
 
 .selectedF {
     /* background-color: bisque; */
-    background-color: rgba(175, 224, 41, 0.733);
-    color: black;
+    /* background-color: rgba(175, 224, 41, 0.733); */
+    background-color: var(--btnActiveColor);
+    /* background-color: var(--colorAccent); */
+    /* color: black; */
+    color: var(--btnColor);
 }
 
 .normalF {
-    background-color: black;
+    background-color: var(--btnColor);
 }
 
 /*
@@ -65,10 +69,20 @@ nav>ul>li>:hover {
 .order {}
 
 .btnNormal {
-    background-color: #777;
+    background-color: var(--btnColor);
+    color: var(--btnFontColor);
     cursor: pointer;
+    padding: .125rem;
+    margin: .125rem;
 }
 
+.btnNormal:hover {
+    background-color: var(--btnHoverColor);
+}
+
+
 .btnActive {
-    background-color: aquamarine;
+    background-color: var(--btnActiveColor);
+    padding: .125rem;
+    margin: .125rem;
 }
