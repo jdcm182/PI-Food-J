@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect/* , useDispatch, useSelector */ } from 'react-redux';
-import { getDetail } from '../actions';
+import { getDetail, deleteR, getAllRecipes } from '../actions';
 import style from './Detail.module.css';
 import NavBar from './NavBar'
 
-export /* default */ function Detail({ match, detailGlobal, getDetailGlobal }) {
+export /* default */ function Detail({ match, detailGlobal, getDetailGlobal, deleteR, history }) {
 
     let id = /* props. */match.params.id;
 
@@ -20,6 +20,8 @@ export /* default */ function Detail({ match, detailGlobal, getDetailGlobal }) {
         else if (detailGlobal.id && detailGlobal.id[0] === 'B') { // id from local DB
             detailGlobal.id !== id && getDetailGlobal(id);
         } else { // id from API
+            console.log('💤💤💤 typeof detailGlobal.id : ', typeof detailGlobal.id)
+            console.log('💤💤💤 parseInt(id) : ', parseInt(id))
             detailGlobal.id !== parseInt(id) && getDetailGlobal(id);
         }
     }, [detailGlobal, id, getDetailGlobal /* id, props.detailGlobal */])
@@ -30,11 +32,18 @@ export /* default */ function Detail({ match, detailGlobal, getDetailGlobal }) {
     //htmlObject.getElementById("myDiv").style.marginTop = something;
     /* https://stackoverflow.com/questions/2522422/converting-a-javascript-string-to-a-html-object */
 
+    //console.log('Detail.jsx - id: ', id)
+
     return (
         <div className={style.detail}>
             <NavBar /*setPage={actPage }*/ />
             DETAIL
             < br />
+            {id && id[0] === 'B' ? <button onClick={() => {
+                deleteR(id);
+                history.push('/recipes/main');
+                getAllRecipes();
+            }}>Eliminar</button> : null}
             {/* JSON.stringify(props) */}
             < br />
             id: {/* props.detailGlobal. */id} <br />
@@ -148,7 +157,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        getDetailGlobal: (id) => dispatch(getDetail(id))
+        getDetailGlobal: (id) => dispatch(getDetail(id)),
+        deleteR: (id) => dispatch(deleteR(id)),
+        getAllRecipes: () => dispatch(getAllRecipes())
     }
 }
 

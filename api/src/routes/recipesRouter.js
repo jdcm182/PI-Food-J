@@ -134,7 +134,8 @@ router.get('/', async (req, res) => {
     else { // search !== undefined     ?search={recipe}   <---  query
         //  // query > recipe:  { search: 'garlic' }
 
-        const searchStr = search.replace(/\s/g, '').toLowerCase(); //remove spaces
+        // const searchStr = search.replace(/\s/g, '').toLowerCase(); //remove spaces
+        const searchStr = search.toLowerCase(); //remove spaces
 
         // Search in local DB
         let foundRecipesFromDB = await Recipe.findAll({
@@ -221,21 +222,21 @@ router.get('/', async (req, res) => {
         // join results from local DB & from external API into one
         //let foundRecipes = foundRecipesFromDB.concat(foundRecipesFromAPI/* .data */.results.map(r => extractMainKeys(r)));
         let foundRecipes = cleanRecipesFromDB.concat(foundRecipesFromAPI/* .data */.results.map(r => extractMainKeys(r)));
-        console.log('\n >> (search) foundRecipes.length: ', foundRecipes.length)
+        //console.log('\n >> (search) foundRecipes.length: ', foundRecipes.length)
         // limit amount of results
         if (foundRecipes.length > 0) {
-            console.log('devolviendo arreglo foundRecipes... ')
+            //console.log('devolviendo arreglo foundRecipes... ')
             if (foundRecipes.length <= MAX_AMOUNT) {
-                console.log('devolviendo foundRecipes <= ', MAX_AMOUNT, `  - ${foundRecipes.length} recipes found`)
+                //console.log('devolviendo foundRecipes <= ', MAX_AMOUNT, `  - ${foundRecipes.length} recipes found`)
                 return res.json(foundRecipes);
             } else {
                 const slicedRecipes = foundRecipes.slice(0, MAX_AMOUNT);
-                console.log(`slicedRecipes.length: ${slicedRecipes.length}`)
+                //console.log(`slicedRecipes.length: ${slicedRecipes.length}`)
                 return res.json(slicedRecipes);
             }
         } else {
             console.log('No se encontró ninguna receta con ', search)
-            return res.status(400).json({ error: `No se encontro ninguna receta con ${search}` });
+            return res.status(400).json({ error: `No recipes "${search}" found.` });
         }
         //console.log('foundRecipes.length < 0 ????????????????????????????????????????????')
         return res.status(400).json({ error: 'foundRecipes.length < 0 ?' });

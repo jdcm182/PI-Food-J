@@ -100,10 +100,13 @@ export function doSearch(str) {
     }
 }
 
-export function displayError(str) {
+/* export function displayError(str) {
     return function (dispatch) {
         dispatch({ type: 'SHOW_ERROR', payload: str })
     }
+}  */
+export function displayError(str) {
+    return { type: 'SHOW_ERROR', payload: str }
 }
 
 export function displayInfo(str) {
@@ -182,4 +185,17 @@ export const setOrder = (param, order) => {
     else if (param === 'healthScore' && order === 'ASC') ord = '1-9';
     else if (param === 'healthScore' && order === 'DESC') ord = '9-1';
     return { type: 'SET_ORDER', payload: ord }
+}
+
+export function deleteR(id) {
+    return function (dispatch) {
+        axios.delete(`http://localhost:3001/recipe/${id}`)
+            .then(r => r.data)
+            .then(d => {
+                dispatch({ type: 'DELETE_RECIPE', id })
+                //dispatch({ type: "SHOW_INFO", payload: d })
+            })
+            .then(res => dispatch({ type: 'SHOW_INFO', payload: `Item successfully deleted` }))
+            .catch(e => dispatch({ type: 'SHOW_ERROR', payload: e.message + '<br/>' + e.response.data.error }))
+    }
 }

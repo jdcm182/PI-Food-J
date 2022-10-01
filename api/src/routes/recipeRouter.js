@@ -7,12 +7,13 @@ const { Recipe, Diet } = require('../db.js');
 async function getNextFreeLocalId() {
     console.log('function getNextFreeLocalId: ')
     const storedRecipes = await Recipe.findAll();
-    const dbRecipes = await storedRecipes;
-    console.log('dbRecipes: ', dbRecipes)
-    if (dbRecipes) {
-        dbRecipes.forEach(r => console.log(`${r.id} - ${r.name}`))
+    //const dbRecipes = await storedRecipes;
+    console.log('storedRecipes: ', storedRecipes)
+    console.log('!!storedRecipes: ', !!storedRecipes)
+    if (storedRecipes.length) {
+        storedRecipes.forEach(r => console.log(`${r.id} - ${r.name}`))
 
-        const ids = dbRecipes.map(r => parseInt(r.id.substring(1)));
+        const ids = storedRecipes.map(r => parseInt(r.id.substring(1)));
         const nextId = Math.max(...ids) + 1
         return 'B' + nextId;
     } else {
@@ -118,6 +119,27 @@ router.post('/', async (req, res) => {
 
 })
 
+//              /recipe/id
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+    console.log('\nDELETE - id: ', id)
+    if (id) {
+        try {
+            const r = await Recipe.findByPk(id);
+            console.log('fetched recipe from DB > r: ', r)
+
+            const count = await Recipe.destroy({
+                where: {
+                    id: id
+                }
+            });
+            console.log(`deleted ${count} recipes`)
+            return res.status(200).send(`deleted ${JSON.stringify(r)} recipe`);
+        } catch (e) {
+            return res.status(400).send('Error: ' + e);
+        }
+    }
+})
 
 
 

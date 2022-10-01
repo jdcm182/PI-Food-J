@@ -4,9 +4,9 @@ import style from './SearchBar.module.css';
 import { doSearch, setSearchStr } from '../actions'
 import { FaSearch } from 'react-icons/fa';
 
-export function SearchBar({ dispatchSearch, setPage, searchStGlobal, setGlobalSearchStr }) {
+export function SearchBar({ dispatchSearch, setPage, searchStGlobal, setGlobalSearchStr, history }) {
     const [search, setSearch] = React.useState('');
-
+    //console.log('💥match: ', match)
     useEffect(() => {
         //setSearch(searchSt);
         document.getElementById('searchBox').value = searchStGlobal;
@@ -27,7 +27,10 @@ export function SearchBar({ dispatchSearch, setPage, searchStGlobal, setGlobalSe
         console.log('tempSearch: ', tempSearch)
         e.preventDefault();
         //setSearch(tempSearch);
+        if (history)
+            history.push('/recipes/main');
         /* props. */dispatchSearch(search/* tempSearch */);
+        if (setPage)
         /* props. */setPage(1);
         //setSearch(tempSearch/* tempSearch */); // set localState
         //setGlobalSearchStr(tempSearch.toLowerCase()/* tempSearch *//* e.target.value */); // set globalState (for cache list)

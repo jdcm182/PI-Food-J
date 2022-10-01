@@ -111,7 +111,8 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 dietTypes: diets,
-                filteredRecipes: state.recipes
+                order: '',
+                recipes: state.allRecipes
             }
         case 'RESTORE_RECIPES': console.log('REDUCER > RESTORE_RECIPES')
             // console.log('REDUCER > RESTORE_RECIPES > ')
@@ -127,8 +128,8 @@ export default function rootReducer(state = initialState, action) {
         }
         case 'CREATE_RECIPE': return {
             ...state,
-            recipes: [action.payload, ...state.recipes],
-            allRecipes: [action.payload, ...state.allRecipes]
+            recipes: [/* action.payload, */ ...state.recipes],
+            allRecipes: [/* action.payload, */ ...state.allRecipes]
             // setear pagina en 1 ..
         }
         case 'DISMISS_MSG': {
@@ -154,6 +155,11 @@ export default function rootReducer(state = initialState, action) {
         case 'CLEAR_ORDER': return {
             ...state,
             order: ''
+        }
+        case 'DELETE_RECIPE': return {
+            ...state,
+            allRecipes: [...state.allRecipes].filter(r => r.id !== action.id),
+            recipes: [...state.allRecipes]
         }
         default: return { ...state };
     };
