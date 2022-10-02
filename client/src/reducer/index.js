@@ -128,7 +128,7 @@ export default function rootReducer(state = initialState, action) {
         }
         case 'CREATE_RECIPE': return {
             ...state,
-            recipes: [/* action.payload, */ ...state.recipes],
+            recipes: [/* action.payload, */ ...state.allRecipes],
             allRecipes: [/* action.payload, */ ...state.allRecipes]
             // setear pagina en 1 ..
         }
@@ -159,7 +159,7 @@ export default function rootReducer(state = initialState, action) {
         case 'DELETE_RECIPE': return {
             ...state,
             allRecipes: [...state.allRecipes].filter(r => r.id !== action.id),
-            recipes: [...state.allRecipes]
+            recipes: [...state.allRecipes].filter(r => r.id !== action.id)
         }
         default: return { ...state };
     };

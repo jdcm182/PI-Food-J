@@ -87,10 +87,10 @@
 }
 
 .imgContainer {
-    /* height: 20%; */
+    height: 100%;
     /* width: 100%; */
     /* background-color: blue; */
-    overflow: hidden;
+    /* overflow: hidden; */
 
     /* 
     border-radius: 50%;    
@@ -107,8 +107,8 @@
     /* width: 10rem; */
     /* height: 10rem; */
     /* background-position: center; */
-    background-size: cover;
-    /* object-fit: cover; */
+    /* background-size: cover; */
+    object-fit: cover;
 
     /* filter: grayscale(100%); */
     /* transition: filter 300ms; */

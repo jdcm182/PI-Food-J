@@ -167,7 +167,8 @@ export const createRecipe = obj =>
         axios.post('http://localhost:3001/recipe', obj)
             .then(r => r.data)
             .then(recipe => {
-                dispatch({ type: 'CREATE_RECIPE', payload: recipe })
+                //dispatch({ type: 'CREATE_RECIPE', payload: recipe })
+                dispatch(getAllRecipes())
             })
             .catch(e => dispatch({ type: 'SHOW_ERROR', payload: e.message + '<br/>' + e.response.data.error }));
     }
