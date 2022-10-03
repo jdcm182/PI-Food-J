@@ -72,8 +72,6 @@ nav>ul>li>:hover {
     background-color: var(--btnColor);
     color: var(--btnFontColor);
     cursor: pointer;
-    padding: .125rem;
-    margin: .125rem;
 }
 
 .btnNormal:hover {
@@ -83,6 +81,15 @@ nav>ul>li>:hover {
 
 .btnActive {
     background-color: var(--btnActiveColor);
-    padding: .125rem;
+}
+
+.btnNormal,
+.btnActive {
+    width: fit-content;
+    padding: .125rem .5rem;
     margin: .125rem;
+}
+
+.orderTitle {
+    font-size: .8rem;
 }

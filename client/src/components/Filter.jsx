@@ -2,7 +2,7 @@ import React from 'react';
 import style from './Filter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 //import { NavLink } from 'react-router-dom';
-import { setFilters/* , restoreRecipes */, displayInfo/* displayError */, setRecipes, setOrder } from '../actions';
+import { setFilters/* , restoreRecipes */, displayInfo/* displayError */, setRecipes, setOrder, clearFilters } from '../actions';
 
 
 export default function Filter() {
@@ -86,7 +86,7 @@ export default function Filter() {
                 dispatch(setFilters(filteredRecipes));
             }
 
-            console.log('Ordenando desde Filter..')
+            //console.log('Ordenando desde Filter..')
             //dispatch(setOrder(param, order));
             //order(param, o)
 
@@ -129,20 +129,23 @@ export default function Filter() {
                 ORDER: {order}
                 <br />
                 <div>
-                    Recipe Name <br />
+                    <span className={style.orderTitle}>Recipe Name</span> <br />
                     <button className={order === 'A-Z' ? style.btnActive : style.btnNormal}
                         onClick={/* orderAZ */ () => doOrder('name', 'ASC')}>A-Z</button>
                     <button className={order === 'Z-A' ? style.btnActive : style.btnNormal}
                         onClick={/* orderZA */ () => doOrder('name', 'DESC')}>Z-A</button>
                 </div>
                 <div>
-                    Recipe Health Score<br />
+                    <span className={style.orderTitle}>Recipe Health Score</span><br />
                     <button className={order === '1-9' ? style.btnActive : style.btnNormal}
                         onClick={/* order19 */() => doOrder('healthScore', 'ASC')}>1-9</button>
                     <button className={order === '9-1' ? style.btnActive : style.btnNormal}
                         onClick={/* order91 */() => doOrder('healthScore', 'DESC')}>9-1</button>
                 </div>
             </div>
+
+            <br />
+            <button className={style.btnNormal} onClick={() => dispatch(clearFilters())}>RESET</button>
 
         </div >
     )
@@ -286,8 +289,15 @@ function bubbleSort(arr, param, order) {
         for (let i = 0; i < array.length - 1; i++) {
             cantIterations++;
             let swapCondition = false;
-            if (order === 'ASC') swapCondition = array[i][param] > array[i + 1][param];
-            else swapCondition = array[i][param] < array[i + 1][param];
+            let actual = array[i][param];
+            let next = array[i + 1][param];
+            if (typeof actual === "string" && typeof next === "string") {
+                actual = actual.toLowerCase();
+                next = next.toLowerCase();
+            }
+            if (order === 'ASC') swapCondition = actual > next;
+            else if (order === 'DESC') swapCondition = actual < next;
+            //else swapCondition = array[i][param] < array[i + 1][param];
             if (swapCondition) {
                 let aux = array[i];
                 array[i] = array[i + 1];

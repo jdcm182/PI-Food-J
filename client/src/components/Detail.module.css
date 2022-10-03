@@ -1,10 +1,111 @@
 .detail {
     color: gray;
+    height: 100%;
+    width: 100%;
+}
+
+.glass {
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(4px);
+    background-color: #00000033;
+
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+
+}
+
+.content {
+    width: 80%;
+    /* border: 1px solid blue; */
+    border: 3px solid #2c2c2c;
+    margin-inline: auto;
+    padding: 1rem;
+    border-radius: 1rem;
+
+    background-color: #1616167a;
+    box-shadow: 1px 1px 20px #00000055;
+
+    margin-top: 8rem;
+
+}
+
+.columnContainer {
+    display: flex;
+    flex-direction: row;
+    /* background-color: white; */
+}
+
+.column {
+    text-align: justify;
+    /* border: 5px solid limegreen; */
+    /* background-color: black; */
+    padding: 5px;
+    /* display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+    align-items: stretch; */
+    width: 50%;
+
+    margin-bottom: 1.5rem;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-wrap: break-word;
+}
+
+.line {
+    display: flex;
+    flex-direction: row;
+}
+
+.line>span {
+    margin-right: .5rem;
+}
+
+@media (max-width: 40em) {
+    .columnContainer {
+        /* display: block; */
+        flex-direction: column;
+        /* width: 100%; */
+        /* align-items: center; */
+        /* justify-content: center; */
+        /* text-align: center; */
+        /* max-width: 40em; */
+        /* margin: 0 auto; */
+    }
+
+    .column {
+        width: 90%;
+        margin: 1rem 2rem;
+        padding: 1rem 2rem;
+    }
+}
+
+
+.nameTitle {
+    font-size: 2rem;
+}
+
+.discrete {
+    color: #4c4c4c;
+    display: inline-flex;
+    width: fit-content;
+    /* border: 1px solid white; */
 }
 
 .image {
-    /**/
+    object-fit: cover;
+    width: 100%;
+    max-width: 30rem;
+    border: 5px solid #74747478;
+    border-radius: 2rem;
+    box-shadow: 0px 0px 10px #0000006b;
+    margin-bottom: 1.5rem;
 }
+
 
 .dietType,
 .dishType {
@@ -14,10 +115,17 @@
     margin: auto;
     padding: .25rem;
     border-radius: .8rem;
+    font-size: .8rem;
+}
+
+.dietTypeContainer {
+    display: flex;
+    flex-direction: row;
 }
 
 .dietType {
-    background-color: chartreuse;
+    background-color: var(--colorAccent);
+    margin-left: .5rem;
 }
 
 .dishType {
@@ -53,4 +161,16 @@
 .equipmentImg {
     width: 2rem;
     height: 2rem;
+}
+
+.btnDelete {
+    float: right;
+    width: fit-content;
+    padding: 0 .5rem;
+    background-color: rgb(209, 63, 63);
+}
+
+.btnDelete:hover {
+    background-color: rgb(235, 88, 88);
+
 }

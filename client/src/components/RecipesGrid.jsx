@@ -11,7 +11,7 @@ export default function RecipesGrid(props) {
         //console.log('RecipesGrid.jsx --- useEffect ---')
     })
 
-    console.log('💦props: ', props)
+    //console.log('💦props: ', props)
 
     return (
         <div className={style.cardsContainer}>
