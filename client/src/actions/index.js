@@ -157,7 +157,14 @@ export function getDetail(id) {
         return fetch(`http://localhost:3001/detail/${id}`)
             .then(response => response.json())
             .then(detail => dispatch({ type: 'SET_DETAIL', payload: detail }))
-            .catch(e => dispatch({ type: 'SHOW_ERROR', payload: e.message + '<br/>' + e.response.data.error }))
+            .catch(e => dispatch({ type: 'SHOW_ERROR', payload: e.message + '<br/>' /* + e.response.data.error */ }))
+    }
+}
+
+export function clearDetail() {
+    return {
+        type: 'SET_DETAIL',
+        payload: {}
     }
 }
 

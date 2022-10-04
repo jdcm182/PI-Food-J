@@ -19,6 +19,10 @@ export default function RecipeCard(props) {
     //allTypes.filter(global => global.type ===)
     // console.log('--- props.name:  ', props.name)
     // console.log('myDietTypes: ', myDietTypes)
+
+    // const defaultImg = 'https://eadn-wc01-4177395.nxedge.io/wp-content/uploads/2020/02/ff-default-recipe.png';
+    const defaultImg = 'https://spoonacular.com/recipeImages/607954-312x231.jpg';
+
     return (
         <div className={style.card}>
             <Link to={`/detail/${props.id}`}
@@ -46,7 +50,7 @@ export default function RecipeCard(props) {
                     )}
                 </div>
                 <div className={style.imgContainer}>
-                    <img className={style.image} src={props.image} alt={"Cover image of " + props.name} />
+                    <img className={style.image} src={props.image ? props.image : defaultImg} alt={"Cover image of " + props.name} />
                 </div>
             </Link>
         </div>

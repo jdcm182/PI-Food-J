@@ -9,8 +9,9 @@ import { Pagination } from './Pagination.jsx';
 //import axios from 'axios';
 
 import {
-    getAllRecipes/* , getAllRecipes1, getRecipes2,
+    getAllRecipes, /*getAllRecipes1, getRecipes2,
     getRecipesPT06, getRecipes3 */
+    clearDetail,
 } from '../actions';
 import Filter from './Filter.jsx';
 import Cache from './Cache.jsx';
@@ -68,6 +69,8 @@ export /* default */ function Main({ recipes, filteredRecipes, cache }) {
         if (recipes && recipes.length > 0) {
             paginar();
         }
+
+        dispatch(clearDetail());
 
     }, [recipes, page, dispatch]);
 

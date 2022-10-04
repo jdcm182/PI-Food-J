@@ -109,70 +109,66 @@ export default function CreateRecipe(props) {
     return (
         <div className={style.createContainer}>
             <NavBar />
-            <div>CREATE COMPONENT</div>
-            <br />
 
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <div className={style.glass}>
+                <div className={style.content}>
 
-                <div className={style.inputContainer}>
-                    <div className={style.inputItem}>
-                        <label htmlFor="name">Name: </label>
-                        <input name='name' id="name" type="text" value={input.name} autoComplete="off" onChange={(e) => handleChange(e)} />
-                    </div>
-                    <span id='nameSpan' className={style.msg}></span>
-                </div>
-
-                <div className={style.inputContainer}>
-                    <div className={style.inputItem}>
-                        <label htmlFor="summary">Summary: </label>
-                        <input name='summary' id="summary" type="text" value={input.summary} autoComplete="off" onChange={(e) => handleChange(e)} />
-                    </div>
-                    <span id='summarySpan' className={style.msg}></span>
-                </div>
-
-                <div className={style.inputContainer}>
-                    <div className={style.inputItem}>
-                        <label htmlFor="healthScore">healthScore: </label>
-                        <input name='healthScore' id="healthScore" type="text" value={input.healthScore} autoComplete="off" onChange={(e) => handleChange(e)} />
-                    </div>
-                    <span id='healthScoreSpan' className={style.msg}></span>
-                </div>
-
-                <div className={style.inputContainer}>
-                    <div className={style.inputItem}>
-                        <label htmlFor="stepByStep">stepByStep: </label>
-                        <input name='stepByStep' id="stepByStep" type="text" value={input.stepByStep} autoComplete="off" onChange={(e) => handleChange(e)} />
-                    </div>
-                    <span id='stepByStepSpan' className={style.msg}></span>
-                </div>
-
-                <div className={style.inputContainer}>
-                    <div className={style.inputItem}>
-                        <label htmlFor="image">image: </label>
-                        <input name='image' id="image" type="text" value={input.image} autoComplete="off" onChange={(e) => handleChange(e)} />
-                    </div>
-                    <span id='imageSpan' className={style.msg}></span>
-                </div>
-
-                <div className={style.inputContainer}>
-                    <div className={style.inputItem}>
-                        <label htmlFor="dietTypes">dietTypes: </label>
-                        <select multiple name='dietTypes' id="dietTypesSelector" size="10" onChange={(e) => handleChange(e)} >
-                            {allDietTypes && allDietTypes.map((dt, i) => (
-                                <option key={"odt" + i} value={dt.type}>{dt.name}</option>
-                            ))}
-                        </select>
-                    </div>
-                    <span id='dietTypesSpan' className={style.msg}></span>
-                </div>
-
-                <div>
-                    <input type={'submit'} value={'CREATE'} className={style.createBtn} />
-                </div>
-
-            </form>
+                    <div><b>CREATE NEW RECIPE</b></div>
+                    <br />
+                    <form onSubmit={(e) => handleSubmit(e)}>
+                        <div className={style.inputContainer}>
+                            <div className={style.inputItem}>
+                                <label htmlFor="name">Name: </label>
+                                <input name='name' id="name" type="text" value={input.name} autoComplete="off" onChange={(e) => handleChange(e)} />
+                            </div>
+                            <span id='nameSpan' className={style.msg}></span>
+                        </div>
+                        <div className={style.inputContainer}>
+                            <div className={style.inputItem}>
+                                <label htmlFor="summary">Summary: </label>
+                                <input name='summary' id="summary" type="text" value={input.summary} autoComplete="off" onChange={(e) => handleChange(e)} />
+                            </div>
+                            <span id='summarySpan' className={style.msg}></span>
+                        </div>
+                        <div className={style.inputContainer}>
+                            <div className={style.inputItem}>
+                                <label htmlFor="healthScore">healthScore: </label>
+                                <input name='healthScore' id="healthScore" type="text" value={input.healthScore} autoComplete="off" onChange={(e) => handleChange(e)} />
+                            </div>
+                            <span id='healthScoreSpan' className={style.msg}></span>
+                        </div>
+                        <div className={style.inputContainer}>
+                            <div className={style.inputItem}>
+                                <label htmlFor="stepByStep">stepByStep: </label>
+                                <input name='stepByStep' id="stepByStep" type="text" value={input.stepByStep} autoComplete="off" onChange={(e) => handleChange(e)} />
+                            </div>
+                            <span id='stepByStepSpan' className={style.msg}></span>
+                        </div>
+                        <div className={style.inputContainer}>
+                            <div className={style.inputItem}>
+                                <label htmlFor="image">image: </label>
+                                <input name='image' id="image" type="text" value={input.image} autoComplete="off" onChange={(e) => handleChange(e)} />
+                            </div>
+                            <span id='imageSpan' className={style.msg}></span>
+                        </div>
+                        <div className={style.inputContainer}>
+                            <div className={style.inputItem}>
+                                <label htmlFor="dietTypes">dietTypes: </label>
+                                <select multiple name='dietTypes' id="dietTypesSelector" size="10" onChange={(e) => handleChange(e)} >
+                                    {allDietTypes && allDietTypes.map((dt, i) => (
+                                        <option key={"odt" + i} value={dt.type}>{dt.name}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <span id='dietTypesSpan' className={style.msg}></span>
+                        </div>
+                        <div>
+                            <input type={'submit'} value={'CREATE'} className={style.createBtn} />
+                        </div>
+                    </form>
+                </div>           </div>
 
 
-        </div>
+        </div> /* .createContainer */
     )
 }

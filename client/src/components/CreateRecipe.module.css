@@ -1,6 +1,30 @@
 .createContainer {
     /* border: 1px solid white; */
     color: gray;
+    height: 100%;
+    width: 100%;
+}
+
+.glass {
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(4px);
+
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    width: 80%;
+    border: 3px solid #2c2c2c;
+    padding: 1rem;
+    border-radius: 1rem;
+
+    background-color: #1616167a;
+    box-shadow: 1px 1px 20px #00000055;
+
+    margin-top: 4rem;
+    margin-bottom: 12rem;
 }
 
 .inputContainer {
@@ -19,6 +43,12 @@
     width: 100%;
     /* width: fit-content; */
     /* border: 1px solid blue; */
+}
+
+.inputItem>input {}
+
+.inputItem>input:focus {
+    outline: none;
 }
 
 .inputItem>input,
@@ -40,7 +70,7 @@
 
 
 .createBtn {
-    background-color: #a16237;
+    background-color: #afe029bb;
     padding: 1rem 3rem;
     margin: 1rem;
     border-radius: 1.2rem 0;
@@ -50,8 +80,13 @@
 }
 
 .createBtn:hover {
-    background-color: #e7954e;
+    background-color: #c4ff24bb;
     /* background-color: #f69a45; */
     cursor: pointer;
     /* rgb(250, 42, 42); */
+}
+
+.msg {
+    color: rgb(179, 58, 58);
+    font-size: .8rem;
 }
