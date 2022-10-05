@@ -27,7 +27,7 @@
     background-color: #1616167a;
     box-shadow: 1px 1px 20px #00000055;
 
-    margin-top: 8rem;
+    margin-top: 5rem;
     margin-bottom: 12rem;
 
 }
@@ -121,6 +121,8 @@
 
     margin-left: .5rem;
     margin-bottom: .5rem;
+
+    text-transform: capitalize;
 }
 
 .dietTypeContainer {

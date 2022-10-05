@@ -4,7 +4,7 @@ import style from './MainDataHandler.module.css';
 import RecipesGrid from './RecipesGrid.jsx'
 import NavBar from './NavBar.jsx'
 // import Order from './Order.jsx'
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { Pagination } from './Pagination.jsx';
 //import axios from 'axios';
 
@@ -12,6 +12,7 @@ import {
     getAllRecipes, /*getAllRecipes1, getRecipes2,
     getRecipesPT06, getRecipes3 */
     clearDetail,
+    setPage,
 } from '../actions';
 import Filter from './Filter.jsx';
 import Cache from './Cache.jsx';
@@ -22,18 +23,19 @@ const ITEMS_PER_PAGE = 9;
 
 
 // Pagination, Sort & Filter
-export /* default */ function Main({ recipes, filteredRecipes, cache }) {
+export /* default */ function Main({ recipes, filteredRecipes, cache, history }) {
     // console.log('------------------------------------------------------------------------')
-    // console.log('2️⃣ MainDataHandler.jsx > props: ', props)
+    console.log('2️⃣ MainDataHandler.jsx > history: ', history)
 
-    const [page, setPage] = useState(1);
     const [subset, setSubset] = useState([]);
+    //const [page, setPage] = useState(1);
+    const page = useSelector((state) => state.page);
 
     const dispatch = useDispatch();
 
     //const [posts, setPosts] = useState([]);
 
-    function actPage(p) { setPage(p); }
+    function actPage(p) { dispatch(setPage(p)) }
 
 
 
@@ -83,7 +85,7 @@ export /* default */ function Main({ recipes, filteredRecipes, cache }) {
 
     return (
         <div className={style.container}>
-            <NavBar setPage={actPage} />
+            <NavBar setPage={actPage} history={history} />
 
             <div className={style.main}>
                 <div className={style.column}>
@@ -96,11 +98,11 @@ export /* default */ function Main({ recipes, filteredRecipes, cache }) {
 
                     {recipes && <Pagination recipes={recipes}
                         itemsPerPage={ITEMS_PER_PAGE}
-                        page={page} setPage={actPage} />}
+                        page={page} /* setPage={actPage} */ />}
                     {subset && <RecipesGrid recipes={subset} />}
                     {recipes && <Pagination recipes={recipes}
                         itemsPerPage={ITEMS_PER_PAGE}
-                        page={page} setPage={actPage} />}
+                        page={page} /* setPage={actPage} */ />}
 
                 </div>
 

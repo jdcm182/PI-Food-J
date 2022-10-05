@@ -1,6 +1,7 @@
 import React from 'react'
 // import { connect } from 'react-redux'
-// import { setPage } from '../actions';
+import { useSelector, useDispatch } from 'react-redux'
+import { setPage } from '../actions';
 //import { NavLink } from 'react-router-dom';
 import style from './Pagination.module.css';
 
@@ -9,6 +10,9 @@ import style from './Pagination.module.css';
 export function Pagination(props) {
 
     //console.log('Pagination.jsx > props : ', props)
+
+    const page = useSelector((state) => state.page);
+    const dispatch = useDispatch();
 
     let pages = Math.ceil(props.recipes && (props.recipes.length / props.itemsPerPage));
 
@@ -19,11 +23,11 @@ export function Pagination(props) {
 
     function handlePage(e) {
         if (e === '<') {
-            if (props.page > 1) props.setPage(props.page - 1);
+            if (/* props. */page > 1) /* props. */dispatch(setPage(/* props. */page - 1));
         } else if (e === '>') {
-            if (props.page < pages) props.setPage(props.page + 1);
+            if (/* props. */page < pages) /* props. */dispatch(setPage(/* props. */page + 1));
         } else {
-            props.setPage(e)
+            /* props. */dispatch(setPage(e))
         }
     }
     /* <div>Pages: [1] [2] [3] </div> */
@@ -38,17 +42,17 @@ export function Pagination(props) {
     //<div> Pages: {arr.map((e, i) => <NavLink to={'/'} key={'nl' + i}> {e} </NavLink>)} </div>
     return (
         <div className={style.container}> {/* Pages: */}
-            {props.page === 1 ? <button disabled>&lt;</button> : <button onClick={() => handlePage('<')} className={style.btnT} > &lt; </button>}
+            {/* props. */page === 1 ? <button disabled>&lt;</button> : <button onClick={() => handlePage('<')} className={style.btnT} > &lt; </button>}
             {/* {<button onClick={() => handlePage('<')} className={style.btnT}> &lt; </button>} */}
             {arr.map((e, i) =>
                 <button
                     onClick={() => handlePage(e)}
-                    className={e === props.page ? style.actual : style.normal}
+                    className={e === /* props. */page ? style.actual : style.normal}
                     key={'nl' + i} >
                     {e}
                 </button>)}
             {/* {<button onClick={() => handlePage('>')}> &gt; </button>} */}
-            {props.page === pages ?
+            {/* props. */page === pages ?
                 <button disabled>&gt;</button>
                 : <button onClick={() => handlePage('>')} className={style.btnT} > &gt; </button>}
         </div>

@@ -89,6 +89,7 @@ export function getAllRecipes() {
 export function doSearch(str) {
     return function (dispatch) {
         //                               /recipes?search={recipe}
+        dispatch(clearFilters());
         axios.get(`http://localhost:3001/recipes?search=${str}`)
             .then(r => r.data)
             .then(d => dispatch({ type: 'SEARCH_RESULTS', payload: d }))
@@ -206,4 +207,12 @@ export function deleteR(id) {
             .then(res => dispatch({ type: 'SHOW_INFO', payload: `Item successfully deleted` }))
             .catch(e => dispatch({ type: 'SHOW_ERROR', payload: e.message + '<br/>' + e.response.data.error }))
     }
+}
+
+export function setPage(page) {
+    return { type: 'SET_PAGE', payload: page }
+}
+
+export function setLoadingMain() {
+    return { type: 'SET_LOADING_MAIN' }
 }

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import style from './Cache.module.css';
-import { /* useSelector, */ connect/* , useDispatch */ } from 'react-redux';
+import { /* useSelector, */ connect, useDispatch } from 'react-redux';
 //import { NavLink } from 'react-router-dom';
-import { doSearch, setSearchStr, setFilters, clearFilters, displayError, clearOrder } from '../actions'
+import { doSearch, setSearchStr, setFilters, clearFilters, displayError, clearOrder, setPage } from '../actions'
 
 import axios from 'axios';
 
@@ -10,6 +10,9 @@ export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr
 
 
     const [files, setFiles] = useState([]);
+
+    const dispatch = useDispatch();
+
 
     useEffect(() => {
         //!files && files.length === 0 && handleClick();
@@ -47,6 +50,7 @@ export /* default */ function Cache(/* props */{ search, searchStr, setSearchStr
                         /* props. */search(f);
                         /* props. */setSearchStr(f);
                             //setFilters([]);
+                            dispatch(setPage(1));
                         } catch (e) {
                             console.log('ERROR - Cache.jsx > e: ', e)
                             displayError(e.message)

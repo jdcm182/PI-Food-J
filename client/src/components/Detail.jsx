@@ -29,7 +29,7 @@ export /* default */ function Detail({ match, detailGlobal, getDetailGlobal, del
             console.log('💤💤💤 parseInt(id) : ', parseInt(id))
             detailGlobal.id !== parseInt(id) && getDetailGlobal(id);
         } */
-    }, [/* detailGlobal, */ id, getDetailGlobal /*, props.detailGlobal */])
+    }, [/* detailGlobal, */ id, getDetailGlobal, displayError /*, props.detailGlobal */])
 
     /* var summary = detailGlobal.summary;
     var summaryHtmlObject = document.createElement('div');

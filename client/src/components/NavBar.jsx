@@ -1,9 +1,10 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import style from './NavBar.module.css'
 import SearchBar from './SearchBar.jsx'
 
 export default function NavBar(props) {
+    console.log('NavBar > props: ', props)
     return (
         <div className={style.navBar}>
 
@@ -14,13 +15,13 @@ export default function NavBar(props) {
             <nav className={style.menu}>
                 <ul>
                     <li><NavLink to={'/'}>Landing</NavLink></li>
-                    <li><NavLink to={'/recipes/main'}>Main</NavLink></li>
-                    <li><NavLink to={'/recipes/create'}>Create</NavLink></li>
+                    <li><Link to={'/recipes/main'}>Main</Link></li>
+                    <li><Link to={'/recipes/create'}>Create</Link></li>
                 </ul>
             </nav>
 
             <div className={style.searchWrapper}>
-                {/* [SEARCH] */}{<SearchBar setPage={props.setPage} />}
+                {/* [SEARCH] */}{<SearchBar history={props.history}/* setPage={props.setPage} */ />}
             </div>
 
         </div>

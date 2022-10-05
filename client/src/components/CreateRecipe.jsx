@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import style from './CreateRecipe.module.css';
 import NavBar from './NavBar.jsx';
-import { createRecipe } from '../actions';
+import { createRecipe, displayError } from '../actions';
 
 
 export default function CreateRecipe(props) {
@@ -96,11 +96,15 @@ export default function CreateRecipe(props) {
 
         // NO ERRORS FOUND
         if (!errorFound) {
-            let res = dispatch(createRecipe(input));
-            setInput({ name: '', summary: '', healthScore: '', stepByStep: '', image: '', dietTypes: [] });
-            props.history.push('/recipes/main')
-            console.log('NO ERRORS FOUND!')
-            console.log('res: ', res)
+            try {
+                let res = dispatch(createRecipe(input));
+                setInput({ name: '', summary: '', healthScore: '', stepByStep: '', image: '', dietTypes: [] });
+                props.history.push('/recipes/main')
+                console.log('NO ERRORS FOUND!')
+                console.log('res: ', res)
+            } catch (e) {
+                dispatch(displayError(e.message));
+            }
         }
 
 

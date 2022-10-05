@@ -60,6 +60,8 @@ const initialState = {
     errorMsg: '',
     infoMsg: '',
     //error: { msg: '', detail: '' }
+    page: 1,
+    isLoading: true,
 }
 
 
@@ -69,7 +71,8 @@ export default function rootReducer(state = initialState, action) {
         case 'GET_ALL_RECIPES': return {
             ...state,
             recipes: [...action.payload],
-            allRecipes: [...action.payload]
+            allRecipes: [...action.payload],
+            isLoading: false,
         }
         case 'GET_ALL_DIETS': return {
             ...state,
@@ -160,6 +163,17 @@ export default function rootReducer(state = initialState, action) {
             ...state,
             allRecipes: [...state.allRecipes].filter(r => r.id !== action.id),
             recipes: [...state.allRecipes].filter(r => r.id !== action.id)
+        }
+        case 'SET_PAGE': return {
+            ...state,
+            page: action.payload
+        }
+        case 'SET_LOADING_MAIN': return {
+            ...state,
+            recipes: [],
+            allRecipes: [],
+            page: 1,
+            isLoading: true,
         }
         default: return { ...state };
     };

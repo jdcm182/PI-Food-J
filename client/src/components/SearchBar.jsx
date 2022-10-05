@@ -1,11 +1,18 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux'
+import { connect, /* useSelector, */ useDispatch } from 'react-redux'
 import style from './SearchBar.module.css';
-import { doSearch, setSearchStr } from '../actions'
+import { doSearch, setSearchStr, setPage, setLoadingMain } from '../actions'
 import { FaSearch } from 'react-icons/fa';
+import { useHistory } from 'react-router-dom';
 
-export function SearchBar({ dispatchSearch, setPage, searchStGlobal, setGlobalSearchStr, history }) {
+export function SearchBar({ dispatchSearch, /* setPage, */ searchStGlobal, setGlobalSearchStr, /* history */ }) {
     const [search, setSearch] = React.useState('');
+    const history = useHistory();
+    console.log('SearchBar > history: ', history)
+    //const page = useSelector((state) => state.page);
+    const dispatch = useDispatch();
+    const setPageGlobal = (p) => dispatch(setPage(p))
+
     //console.log('💥match: ', match)
     useEffect(() => {
         //setSearch(searchSt);
@@ -20,20 +27,30 @@ export function SearchBar({ dispatchSearch, setPage, searchStGlobal, setGlobalSe
         //setSearch(e.target.value)
         console.log('SearchBar > input onChange > handleChange > tempSearch: ', tempSearch)
         setGlobalSearchStr(tempSearch.toLowerCase());
+
+        console.log('CreateRecipe > history', history)
     }
 
     let handleSubmit = (e) => {
+        dispatch(setLoadingMain); //  set loading=true
         console.log('--- SearchBar > handleSubmit ---')
         console.log('tempSearch: ', tempSearch)
         e.preventDefault();
         //setSearch(tempSearch);
-        if (history)
+        console.log('SearchBar > history', history)
+        if (history) {
+            //history.push('/recipes/main');
+            console.log('history ok')
+            //history.goBack();
             history.push('/recipes/main');
+
+        }
         /* props. */dispatchSearch(search/* tempSearch */);
-        if (setPage)
-        /* props. */setPage(1);
+        if (/* setPage */ setPageGlobal)
+        /* props. *//* setPage(1); */ setPageGlobal(1);
         //setSearch(tempSearch/* tempSearch */); // set localState
         //setGlobalSearchStr(tempSearch.toLowerCase()/* tempSearch *//* e.target.value */); // set globalState (for cache list)
+
     }
 
     return (

@@ -2,7 +2,7 @@ import React from 'react';
 import style from './Filter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 //import { NavLink } from 'react-router-dom';
-import { setFilters/* , restoreRecipes */, displayInfo/* displayError */, setRecipes, setOrder, clearFilters } from '../actions';
+import { setFilters/* , restoreRecipes */, displayInfo, displayError, setRecipes, setOrder, clearFilters, setPage } from '../actions';
 
 
 export default function Filter() {
@@ -25,9 +25,13 @@ export default function Filter() {
     const order = useSelector((state) => state.order);
 
     const doOrder = (/* recipes, */ param, o) => {
-        let sortedRecipes = bubbleSort(recipes, param, o);
-        dispatch(setRecipes(sortedRecipes));
-        dispatch(setOrder(param, o));
+        try {
+            let sortedRecipes = bubbleSort(recipes, param, o);
+            dispatch(setRecipes(sortedRecipes));
+            dispatch(setOrder(param, o));
+        } catch (e) {
+            dispatch(displayError(e.message));
+        }
     }
 
     // in: recipes & order
@@ -85,6 +89,7 @@ export default function Filter() {
             } else {
                 dispatch(setFilters(filteredRecipes));
             }
+            dispatch(setPage(1));
 
             //console.log('Ordenando desde Filter..')
             //dispatch(setOrder(param, order));
