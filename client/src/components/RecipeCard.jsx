@@ -45,9 +45,12 @@ export default function RecipeCard(props) {
                             </div>
                         )
                     }
-
-
                     )}
+                </div>
+                <div>
+                    {props.dishTypes && <div>  {props.dishTypes} </div>}
+
+
                 </div>
                 <div className={style.imgContainer}>
                     <img className={style.image} src={props.image ? props.image : defaultImg} alt={"Cover image of " + props.name} />
